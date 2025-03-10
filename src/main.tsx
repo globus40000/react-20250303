@@ -18,7 +18,7 @@ if (!root) {
       createElement(
         "div",
         { key: restaurant.id },
-        createElement("h1", {}, restaurant.name),
+        createElement("h2", {}, restaurant.name),
         createElement("h3", {}, "Menu"),
         createElement(
           "ul",
@@ -47,7 +47,7 @@ createRoot(root).render(
   <StrictMode>
     {restaurants.map((restaurant) => (
       <div key={restaurant.id}>
-        <h1>{restaurant.name}</h1>
+        <h2>{restaurant.name}</h2>
         <h3>Menu</h3>
         <ul>
           {restaurant.menu.map((dish) => (
