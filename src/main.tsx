@@ -45,6 +45,7 @@ if (!root) {
  */
 createRoot(root).render(
   <StrictMode>
+    <h1>Restaurants</h1>
     {restaurants.map((restaurant) => (
       <div key={restaurant.id}>
         <h2>{restaurant.name}</h2>
@@ -62,5 +63,5 @@ createRoot(root).render(
         </ul>
       </div>
     ))}
-  </StrictMode>,
+  </StrictMode>
 );
