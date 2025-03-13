@@ -1,17 +1,26 @@
 import { IReview } from "../../../types";
 import { Review } from "../Review/review";
 
-export const Reviews = ({ reviews }: { reviews: IReview[] }) => {
+interface IReviewsProps {
+  reviews: IReview[];
+  textNoReviews?: string;
+}
+
+export const Reviews = ({ reviews, textNoReviews }: IReviewsProps) => {
   return (
     <div className="reviews">
       <h3>Reviews</h3>
-      <ul>
-        {reviews.map((review) => (
-          <li key={review.id}>
-            <Review review={review} />
-          </li>
-        ))}
-      </ul>
+      {reviews.length === 0 && typeof textNoReviews === "string" ? (
+        <div className="no-reviews">{textNoReviews}</div>
+      ) : (
+        <ul>
+          {reviews.map((review) => (
+            <li key={review.id}>
+              <Review review={review} />
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

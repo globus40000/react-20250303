@@ -9,7 +9,7 @@ export const Restaurant = ({ restaurant }: { restaurant: IRestaurant }) => {
     <div className="restaurant">
       <h2>{name}</h2>
       <Menu menu={menu} />
-      <Reviews reviews={reviews} />
+      <Reviews reviews={reviews} textNoReviews="No reviews yet." />
     </div>
   );
 };
