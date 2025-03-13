@@ -1,4 +1,4 @@
-import { IRestaurant } from "../../../types";
+import { IRestaurant } from "../../types";
 import { Menu } from "../Menu/menu";
 import { Reviews } from "../Reviews/reviews";
 

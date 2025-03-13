@@ -1,4 +1,4 @@
-import { IDish } from "../../../types";
+import { IDish } from "../../types";
 import { Counter } from "../Counter/counter";
 
 export const Dish = ({ dish }: { dish: IDish }) => {

@@ -1,4 +1,4 @@
-import { IReview } from "../../../types";
+import { IReview } from "../../types";
 import { Review } from "../Review/review";
 
 interface IReviewsProps {

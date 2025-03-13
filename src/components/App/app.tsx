@@ -1,4 +1,4 @@
-import { restaurants } from "../../../materials/mock";
+import { restaurants } from "../../mocks/restaurants";
 import { Restaurant } from "../Restaurant/restaurant";
 
 export const App = () => {
