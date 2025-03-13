@@ -1,6 +1,6 @@
-import { Restaurant } from "../types";
+import { IRestaurant } from "../types";
 
-export const restaurants: Restaurant[] = [
+export const restaurants: IRestaurant[] = [
   {
     id: "a757a0e9-03c1-4a2a-b384-8ac21dbe2fb2",
     name: "Dishoom",
