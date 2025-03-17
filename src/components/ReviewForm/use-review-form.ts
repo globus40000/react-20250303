@@ -1,5 +1,6 @@
 import { useReducer } from "react";
-import { RATING_MAX } from "./config";
+import { RATING_MAX, RATING_MIN } from "./config";
+import { keepInRange } from "../../utils";
 
 interface IReviewFormState {
   user: string;
@@ -55,7 +56,10 @@ const reducer = (
     case ReviewFormActionType.SET_TEXT_ACTION:
       return { ...state, text: action.payload };
     case ReviewFormActionType.SET_RATING_ACTION:
-      return { ...state, rating: action.payload };
+      return {
+        ...state,
+        rating: keepInRange(action.payload, RATING_MIN, RATING_MAX),
+      };
     case ReviewFormActionType.RESET_FORM_ACTION:
       return { ...DEFAULT_FORM_VALUE };
     default:
