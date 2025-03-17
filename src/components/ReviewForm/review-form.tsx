@@ -2,11 +2,11 @@ import { FC, FormEvent } from "react";
 import { useReviewForm } from "./use-review-form";
 import { RATING_MAX, RATING_MIN } from "./config";
 
-interface ReviewFormProps {
+interface IReviewFormProps {
   restaurantId: string;
 }
 
-export const ReviewForm: FC<ReviewFormProps> = ({ restaurantId }) => {
+export const ReviewForm: FC<IReviewFormProps> = ({ restaurantId }) => {
   const { user, text, rating, setUser, setText, setRating, resetForm } =
     useReviewForm();
 
