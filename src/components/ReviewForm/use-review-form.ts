@@ -28,7 +28,7 @@ interface ISetRatingAction {
   payload: number;
 }
 
-type IReviewFormActions = ISetUserAction | ISetTextAction | ISetRatingAction;
+type IReviewFormAction = ISetUserAction | ISetTextAction | ISetRatingAction;
 
 const DEFAULT_FORM_VALUE: IReviewFormState = {
   user: "",
@@ -38,7 +38,7 @@ const DEFAULT_FORM_VALUE: IReviewFormState = {
 
 const reducer = (
   state: IReviewFormState,
-  { type, payload }: IReviewFormActions
+  { type, payload }: IReviewFormAction
 ): IReviewFormState => {
   switch (type) {
     case ReviewFormActionType.SET_USER_ACTION:
