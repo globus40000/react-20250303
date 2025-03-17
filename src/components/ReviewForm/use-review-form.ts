@@ -11,6 +11,7 @@ enum ReviewFormActionType {
   SET_USER_ACTION = "SET_USER_ACTION",
   SET_TEXT_ACTION = "SET_TEXT_ACTION",
   SET_RATING_ACTION = "SET_RATING_ACTION",
+  RESET_FORM_ACTION = "RESET_FORM_ACTION",
 }
 
 interface ISetUserAction {
@@ -28,7 +29,15 @@ interface ISetRatingAction {
   payload: number;
 }
 
-type IReviewFormAction = ISetUserAction | ISetTextAction | ISetRatingAction;
+interface IResetFormAction {
+  type: ReviewFormActionType.RESET_FORM_ACTION;
+}
+
+type IReviewFormAction =
+  | ISetUserAction
+  | ISetTextAction
+  | ISetRatingAction
+  | IResetFormAction;
 
 const DEFAULT_FORM_VALUE: IReviewFormState = {
   user: "",
@@ -38,15 +47,17 @@ const DEFAULT_FORM_VALUE: IReviewFormState = {
 
 const reducer = (
   state: IReviewFormState,
-  { type, payload }: IReviewFormAction
+  action: IReviewFormAction
 ): IReviewFormState => {
-  switch (type) {
+  switch (action.type) {
     case ReviewFormActionType.SET_USER_ACTION:
-      return { ...state, user: payload };
+      return { ...state, user: action.payload };
     case ReviewFormActionType.SET_TEXT_ACTION:
-      return { ...state, text: payload };
+      return { ...state, text: action.payload };
     case ReviewFormActionType.SET_RATING_ACTION:
-      return { ...state, rating: payload };
+      return { ...state, rating: action.payload };
+    case ReviewFormActionType.RESET_FORM_ACTION:
+      return { ...DEFAULT_FORM_VALUE };
     default:
       return state;
   }
@@ -66,6 +77,9 @@ export const useReviewForm = () => {
   const setRating = (rating: number) => {
     dispatch({ type: ReviewFormActionType.SET_RATING_ACTION, payload: rating });
   };
+  const resetForm = () => {
+    dispatch({ type: ReviewFormActionType.RESET_FORM_ACTION });
+  };
 
   return {
     user,
@@ -74,5 +88,6 @@ export const useReviewForm = () => {
     setUser,
     setText,
     setRating,
+    resetForm,
   };
 };

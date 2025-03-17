@@ -7,17 +7,21 @@ interface ReviewFormProps {
 }
 
 export const ReviewForm: FC<ReviewFormProps> = ({ restaurantId }) => {
-  const { user, text, rating, setUser, setText, setRating } = useReviewForm();
+  const { user, text, rating, setUser, setText, setRating, resetForm } =
+    useReviewForm();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     console.log({ user, text, rating }, restaurantId);
   };
+  const handleReset = () => {
+    resetForm();
+  };
 
   return (
     <div className="review-form">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} onReset={handleReset}>
         <div>
           <label htmlFor="user">Name: </label>
           <input
@@ -60,6 +64,7 @@ export const ReviewForm: FC<ReviewFormProps> = ({ restaurantId }) => {
         </div>
         <div>
           <input type="submit" />
+          <input type="reset" value="Clear" />
         </div>
       </form>
     </div>
