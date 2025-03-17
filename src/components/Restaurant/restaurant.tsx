@@ -8,13 +8,17 @@ interface IRestaurantProps {
 }
 
 export const Restaurant: FC<IRestaurantProps> = ({ restaurant }) => {
-  const { name, menu, reviews } = restaurant;
+  const { id, name, menu, reviews } = restaurant;
 
   return (
     <div className="restaurant">
       <h2>{name}</h2>
       <Menu menu={menu} />
-      <Reviews reviews={reviews} textNoReviews="No reviews yet." />
+      <Reviews
+        reviews={reviews}
+        textNoReviews="No reviews yet."
+        restaurantId={id}
+      />
     </div>
   );
 };
