@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 
 interface ICounterProps {
   initial?: number;
@@ -6,7 +6,7 @@ interface ICounterProps {
   max?: number;
 }
 
-export const Counter = ({ initial = 0, min, max }: ICounterProps) => {
+export const Counter: FC<ICounterProps> = ({ initial = 0, min, max }) => {
   const [count, setCount] = useState(initial);
 
   const increment = () => {

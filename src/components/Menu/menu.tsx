@@ -1,7 +1,12 @@
+import { FC } from "react";
 import { IDish } from "../../types";
 import { Dish } from "../Dish/dish";
 
-export const Menu = ({ menu }: { menu: IDish[] }) => {
+interface IMenuProps {
+  menu: IDish[];
+}
+
+export const Menu: FC<IMenuProps> = ({ menu }) => {
   return (
     <div className="menu">
       <h3>Menu</h3>

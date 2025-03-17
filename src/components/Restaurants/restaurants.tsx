@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { IRestaurant } from "../../types";
 import { Restaurant } from "../Restaurant/restaurant";
 
@@ -6,7 +6,7 @@ interface IRestaurantsProps {
   restaurants: IRestaurant[];
 }
 
-export const Restaurants = ({ restaurants }: IRestaurantsProps) => {
+export const Restaurants: FC<IRestaurantsProps> = ({ restaurants }) => {
   const [selectedId, setSelectedId] = useState(restaurants[0]?.id);
   const selectedRestaurant = restaurants.find(({ id }) => id === selectedId);
 

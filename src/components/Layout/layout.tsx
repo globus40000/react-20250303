@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import { FC, PropsWithChildren } from "react";
 
-export const Layout = ({ children }: { children: ReactNode }) => {
+export const Layout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <div className="layout">
       <header>Header</header>

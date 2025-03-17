@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { IReview } from "../../types";
 import { Review } from "../Review/review";
 
@@ -6,7 +7,7 @@ interface IReviewsProps {
   textNoReviews?: string;
 }
 
-export const Reviews = ({ reviews, textNoReviews }: IReviewsProps) => {
+export const Reviews: FC<IReviewsProps> = ({ reviews, textNoReviews }) => {
   return (
     <div className="reviews">
       <h3>Reviews</h3>

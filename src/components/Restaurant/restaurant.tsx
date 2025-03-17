@@ -1,8 +1,13 @@
+import { FC } from "react";
 import { IRestaurant } from "../../types";
 import { Menu } from "../Menu/menu";
 import { Reviews } from "../Reviews/reviews";
 
-export const Restaurant = ({ restaurant }: { restaurant: IRestaurant }) => {
+interface IRestaurantProps {
+  restaurant: IRestaurant;
+}
+
+export const Restaurant: FC<IRestaurantProps> = ({ restaurant }) => {
   const { name, menu, reviews } = restaurant;
 
   return (

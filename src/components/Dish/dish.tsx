@@ -1,7 +1,12 @@
+import { FC } from "react";
 import { IDish } from "../../types";
 import { Counter } from "../Counter/counter";
 
-export const Dish = ({ dish }: { dish: IDish }) => {
+interface IDishProps {
+  dish: IDish;
+}
+
+export const Dish: FC<IDishProps> = ({ dish }) => {
   return (
     <div className="dish">
       {dish.name}

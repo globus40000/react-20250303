@@ -1,5 +1,10 @@
+import { FC } from "react";
 import { IReview } from "../../types";
 
-export const Review = ({ review }: { review: IReview }) => {
+interface IReviewProps {
+  review: IReview;
+}
+
+export const Review: FC<IReviewProps> = ({ review }) => {
   return <div className="review">{review.text}</div>;
 };
