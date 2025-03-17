@@ -1,32 +1,23 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 
 interface ICounterProps {
-  initial?: number;
-  min?: number;
-  max?: number;
+  count: number;
+  onIncrement: () => void;
+  onDecrement: () => void;
 }
 
-export const Counter: FC<ICounterProps> = ({ initial = 0, min, max }) => {
-  const [count, setCount] = useState(initial);
-
-  const increment = () => {
-    if (typeof max !== "number" || count < max) {
-      setCount(count + 1);
-    }
-  };
-  const decrement = () => {
-    if (typeof min !== "number" || count > min) {
-      setCount(count - 1);
-    }
-  };
-
+export const Counter: FC<ICounterProps> = ({
+  count,
+  onIncrement,
+  onDecrement,
+}) => {
   return (
     <div className="counter">
-      <button type="button" onClick={increment}>
+      <button type="button" onClick={onIncrement}>
         +
       </button>
       {count}
-      <button type="button" onClick={decrement}>
+      <button type="button" onClick={onDecrement}>
         -
       </button>
     </div>
