@@ -56,7 +56,7 @@ export const ReviewForm: FC<IReviewFormProps> = ({ restaurantId }) => {
           />
         </div>
         <div>
-          <label htmlFor="rating">Rating: </label>
+          <label>Rating: </label>
           <Counter
             count={rating}
             onIncrement={incrementRating}

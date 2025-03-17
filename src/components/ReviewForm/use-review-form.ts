@@ -1,6 +1,4 @@
 import { useReducer } from "react";
-import { RATING_MAX, RATING_MIN } from "./config";
-import { keepInRange } from "../../utils";
 
 interface IReviewFormState {
   user: string;
@@ -11,7 +9,6 @@ interface IReviewFormState {
 enum ReviewFormActionType {
   SET_USER_ACTION = "SET_USER_ACTION",
   SET_TEXT_ACTION = "SET_TEXT_ACTION",
-  SET_RATING_ACTION = "SET_RATING_ACTION",
   INCREMENT_RATING_ACTION = "INCREMENT_RATING_ACTION",
   DECREMENT_RATING_ACTION = "DECREMENT_RATING_ACTION",
   RESET_FORM_ACTION = "RESET_FORM_ACTION",
@@ -25,11 +22,6 @@ interface ISetUserAction {
 interface ISetTextAction {
   type: ReviewFormActionType.SET_TEXT_ACTION;
   payload: string;
-}
-
-interface ISetRatingAction {
-  type: ReviewFormActionType.SET_RATING_ACTION;
-  payload: number;
 }
 
 interface IIncrementRatingAction {
@@ -47,10 +39,12 @@ interface IResetFormAction {
 type IReviewFormAction =
   | ISetUserAction
   | ISetTextAction
-  | ISetRatingAction
   | IIncrementRatingAction
   | IDecrementRatingAction
   | IResetFormAction;
+
+const RATING_MIN = 1;
+const RATING_MAX = 5;
 
 const DEFAULT_FORM_VALUE: IReviewFormState = {
   user: "",
@@ -67,11 +61,6 @@ const reducer = (
       return { ...state, user: action.payload };
     case ReviewFormActionType.SET_TEXT_ACTION:
       return { ...state, text: action.payload };
-    case ReviewFormActionType.SET_RATING_ACTION:
-      return {
-        ...state,
-        rating: keepInRange(action.payload, RATING_MIN, RATING_MAX),
-      };
     case ReviewFormActionType.INCREMENT_RATING_ACTION:
       return { ...state, rating: Math.min(state.rating + 1, RATING_MAX) };
     case ReviewFormActionType.DECREMENT_RATING_ACTION:
@@ -94,9 +83,6 @@ export const useReviewForm = () => {
   const setText = (text: string) => {
     dispatch({ type: ReviewFormActionType.SET_TEXT_ACTION, payload: text });
   };
-  const setRating = (rating: number) => {
-    dispatch({ type: ReviewFormActionType.SET_RATING_ACTION, payload: rating });
-  };
   const incrementRating = () => {
     dispatch({ type: ReviewFormActionType.INCREMENT_RATING_ACTION });
   };
@@ -113,7 +99,6 @@ export const useReviewForm = () => {
     rating,
     setUser,
     setText,
-    setRating,
     incrementRating,
     decrementRating,
     resetForm,
