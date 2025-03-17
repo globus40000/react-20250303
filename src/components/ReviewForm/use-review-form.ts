@@ -12,6 +12,8 @@ enum ReviewFormActionType {
   SET_USER_ACTION = "SET_USER_ACTION",
   SET_TEXT_ACTION = "SET_TEXT_ACTION",
   SET_RATING_ACTION = "SET_RATING_ACTION",
+  INCREMENT_RATING_ACTION = "INCREMENT_RATING_ACTION",
+  DECREMENT_RATING_ACTION = "DECREMENT_RATING_ACTION",
   RESET_FORM_ACTION = "RESET_FORM_ACTION",
 }
 
@@ -30,6 +32,14 @@ interface ISetRatingAction {
   payload: number;
 }
 
+interface IIncrementRatingAction {
+  type: ReviewFormActionType.INCREMENT_RATING_ACTION;
+}
+
+interface IDecrementRatingAction {
+  type: ReviewFormActionType.DECREMENT_RATING_ACTION;
+}
+
 interface IResetFormAction {
   type: ReviewFormActionType.RESET_FORM_ACTION;
 }
@@ -38,6 +48,8 @@ type IReviewFormAction =
   | ISetUserAction
   | ISetTextAction
   | ISetRatingAction
+  | IIncrementRatingAction
+  | IDecrementRatingAction
   | IResetFormAction;
 
 const DEFAULT_FORM_VALUE: IReviewFormState = {
@@ -60,6 +72,10 @@ const reducer = (
         ...state,
         rating: keepInRange(action.payload, RATING_MIN, RATING_MAX),
       };
+    case ReviewFormActionType.INCREMENT_RATING_ACTION:
+      return { ...state, rating: Math.min(state.rating + 1, RATING_MAX) };
+    case ReviewFormActionType.DECREMENT_RATING_ACTION:
+      return { ...state, rating: Math.max(state.rating - 1, RATING_MIN) };
     case ReviewFormActionType.RESET_FORM_ACTION:
       return { ...DEFAULT_FORM_VALUE };
     default:
@@ -81,6 +97,12 @@ export const useReviewForm = () => {
   const setRating = (rating: number) => {
     dispatch({ type: ReviewFormActionType.SET_RATING_ACTION, payload: rating });
   };
+  const incrementRating = () => {
+    dispatch({ type: ReviewFormActionType.INCREMENT_RATING_ACTION });
+  };
+  const decrementRating = () => {
+    dispatch({ type: ReviewFormActionType.DECREMENT_RATING_ACTION });
+  };
   const resetForm = () => {
     dispatch({ type: ReviewFormActionType.RESET_FORM_ACTION });
   };
@@ -92,6 +114,8 @@ export const useReviewForm = () => {
     setUser,
     setText,
     setRating,
+    incrementRating,
+    decrementRating,
     resetForm,
   };
 };

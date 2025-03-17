@@ -1,14 +1,22 @@
 import { FC, FormEvent } from "react";
 import { useReviewForm } from "./use-review-form";
-import { RATING_MAX, RATING_MIN } from "./config";
+import { Counter } from "../Counter/counter";
 
 interface IReviewFormProps {
   restaurantId: string;
 }
 
 export const ReviewForm: FC<IReviewFormProps> = ({ restaurantId }) => {
-  const { user, text, rating, setUser, setText, setRating, resetForm } =
-    useReviewForm();
+  const {
+    user,
+    text,
+    rating,
+    setUser,
+    setText,
+    incrementRating,
+    decrementRating,
+    resetForm,
+  } = useReviewForm();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,17 +57,10 @@ export const ReviewForm: FC<IReviewFormProps> = ({ restaurantId }) => {
         </div>
         <div>
           <label htmlFor="rating">Rating: </label>
-          <input
-            name="rating"
-            type="number"
-            min={RATING_MIN}
-            max={RATING_MAX}
-            id="rating"
-            required
-            onChange={(e) => {
-              setRating(Number(e.target.value));
-            }}
-            value={rating}
+          <Counter
+            count={rating}
+            onIncrement={incrementRating}
+            onDecrement={decrementRating}
           />
         </div>
         <div>
