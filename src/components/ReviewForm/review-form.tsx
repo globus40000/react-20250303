@@ -2,11 +2,7 @@ import { FC, FormEvent } from "react";
 import { useReviewForm } from "./use-review-form";
 import { Counter } from "../Counter/counter";
 
-interface IReviewFormProps {
-  restaurantId: string;
-}
-
-export const ReviewForm: FC<IReviewFormProps> = ({ restaurantId }) => {
+export const ReviewForm: FC = () => {
   const {
     user,
     text,
@@ -20,8 +16,6 @@ export const ReviewForm: FC<IReviewFormProps> = ({ restaurantId }) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    console.log({ user, text, rating }, restaurantId);
   };
 
   return (

@@ -6,14 +6,9 @@ import { ReviewForm } from "../ReviewForm/review-form";
 interface IReviewsProps {
   reviews: IReview[];
   textNoReviews?: string;
-  restaurantId: string;
 }
 
-export const Reviews: FC<IReviewsProps> = ({
-  reviews,
-  textNoReviews,
-  restaurantId,
-}) => {
+export const Reviews: FC<IReviewsProps> = ({ reviews, textNoReviews }) => {
   return (
     <div className="reviews">
       <h3>Reviews</h3>
@@ -28,7 +23,7 @@ export const Reviews: FC<IReviewsProps> = ({
           ))}
         </ul>
       )}
-      <ReviewForm restaurantId={restaurantId} />
+      <ReviewForm />
     </div>
   );
 };
