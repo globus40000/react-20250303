@@ -23,13 +23,10 @@ export const ReviewForm: FC<IReviewFormProps> = ({ restaurantId }) => {
 
     console.log({ user, text, rating }, restaurantId);
   };
-  const handleReset = () => {
-    resetForm();
-  };
 
   return (
     <div className="review-form">
-      <form onSubmit={handleSubmit} onReset={handleReset}>
+      <form onSubmit={handleSubmit} onReset={resetForm}>
         <div>
           <label htmlFor="user">Name: </label>
           <input
