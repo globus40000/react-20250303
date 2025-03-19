@@ -1,5 +1,6 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Counter } from "../Counter/counter";
+import { useCount } from "./use-count";
 
 interface IDishCounterProps {
   initial?: number;
@@ -7,23 +8,8 @@ interface IDishCounterProps {
   max?: number;
 }
 
-export const DishCounter: FC<IDishCounterProps> = ({
-  initial = 0,
-  min,
-  max,
-}) => {
-  const [count, setCount] = useState(initial);
-
-  const increment = () => {
-    if (typeof max !== "number" || count < max) {
-      setCount(count + 1);
-    }
-  };
-  const decrement = () => {
-    if (typeof min !== "number" || count > min) {
-      setCount(count - 1);
-    }
-  };
+export const DishCounter: FC<IDishCounterProps> = ({ initial, min, max }) => {
+  const { count, increment, decrement } = useCount(initial, min, max);
 
   return (
     <div className="dish-counter">
