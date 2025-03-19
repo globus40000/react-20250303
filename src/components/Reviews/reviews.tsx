@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { IReview } from "../../types";
 import { Review } from "../Review/review";
+import { ReviewForm } from "../ReviewForm/review-form";
 
 interface IReviewsProps {
   reviews: IReview[];
@@ -22,6 +23,7 @@ export const Reviews: FC<IReviewsProps> = ({ reviews, textNoReviews }) => {
           ))}
         </ul>
       )}
+      <ReviewForm />
     </div>
   );
 };
