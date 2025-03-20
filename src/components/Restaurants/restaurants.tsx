@@ -1,17 +1,14 @@
 import { FC, useState } from "react";
-import { IRestaurant } from "../../types";
 import { Restaurant } from "../Restaurant/restaurant";
+import { restaurants } from "../../mocks/restaurants";
 
-interface IRestaurantsProps {
-  restaurants: IRestaurant[];
-}
-
-export const Restaurants: FC<IRestaurantsProps> = ({ restaurants }) => {
+export const Restaurants: FC = () => {
   const [selectedId, setSelectedId] = useState(restaurants[0]?.id);
   const selectedRestaurant = restaurants.find(({ id }) => id === selectedId);
 
   return (
     <div className="restaurants">
+      <h1>Restaurants</h1>
       <div className="tabs">
         {restaurants.map(({ id, name }) => (
           <button
