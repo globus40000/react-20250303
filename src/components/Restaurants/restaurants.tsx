@@ -1,13 +1,10 @@
-import { FC, useMemo, useState } from "react";
+import { FC, useState } from "react";
 import { Restaurant } from "../Restaurant/restaurant";
 import { restaurants } from "../../mocks/restaurants";
 
 export const Restaurants: FC = () => {
   const [selectedId, setSelectedId] = useState(restaurants[0]?.id);
-  const selectedRestaurant = useMemo(
-    () => restaurants.find(({ id }) => id === selectedId),
-    [selectedId]
-  );
+  const selectedRestaurant = restaurants.find(({ id }) => id === selectedId);
 
   return (
     <div className="restaurants">
