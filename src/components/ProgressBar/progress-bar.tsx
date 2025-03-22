@@ -1,14 +1,14 @@
 import { FC } from "react";
-import { useWidthPercent } from "./use-width-percent";
+import { useScrollPercent } from "./use-scroll-percent";
 
 export const ProgressBar: FC = () => {
-  const widthPercent = useWidthPercent();
+  const scrollPercent = useScrollPercent();
 
   return (
     <div
       className="progress-bar"
       style={{
-        width: `${String(widthPercent)}%`,
+        width: `${String(scrollPercent)}%`,
         backgroundColor: "limegreen",
         position: "fixed",
         height: "6px",

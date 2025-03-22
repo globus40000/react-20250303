@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 
-const getScrollFraction = () => {
+const calculateScrollPercent = () => {
   const { scrollHeight, clientHeight, scrollTop } = document.documentElement;
   const scrollTopMax = scrollHeight - clientHeight;
 
-  return scrollTop / scrollTopMax;
+  return (scrollTop / scrollTopMax) * 100;
 };
 
-export const useWidthPercent = () => {
-  const [widthPercent, setWidthPercent] = useState(getScrollFraction() * 100);
+export const useScrollPercent = () => {
+  const [scrollPercent, setScrollPercent] = useState(calculateScrollPercent());
 
   useEffect(() => {
     const handleScroll = () => {
-      setWidthPercent(getScrollFraction() * 100);
+      setScrollPercent(calculateScrollPercent());
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -22,5 +22,5 @@ export const useWidthPercent = () => {
     };
   }, []);
 
-  return widthPercent;
+  return scrollPercent;
 };
