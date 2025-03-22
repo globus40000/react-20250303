@@ -4,18 +4,18 @@ export const useCount = (initial = 0, min?: number, max?: number) => {
   const [count, setCount] = useState(initial);
 
   const increment = useCallback(() => {
-    setCount((c) => {
-      const canIncrement = typeof max !== "number" || c < max;
+    setCount((value) => {
+      const canIncrement = typeof max !== "number" || value < max;
 
-      return canIncrement ? c + 1 : c;
+      return canIncrement ? value + 1 : value;
     });
   }, [max]);
 
   const decrement = useCallback(() => {
-    setCount((c) => {
-      const canDecrement = typeof min !== "number" || c > min;
+    setCount((value) => {
+      const canDecrement = typeof min !== "number" || value > min;
 
-      return canDecrement ? c - 1 : c;
+      return canDecrement ? value - 1 : value;
     });
   }, [min]);
 
