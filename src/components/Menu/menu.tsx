@@ -10,7 +10,7 @@ export const Menu: FC<IMenuProps> = ({ menu }) => {
   return (
     <div className="menu">
       <h3>Menu</h3>
-      <ul>
+      <ul role="list">
         {menu.map((dish) => (
           <li key={dish.id}>
             <Dish dish={dish} />

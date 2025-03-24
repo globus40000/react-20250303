@@ -15,7 +15,7 @@ export const Reviews: FC<IReviewsProps> = ({ reviews, textNoReviews }) => {
       {reviews.length === 0 && typeof textNoReviews === "string" ? (
         <div className="no-reviews">{textNoReviews}</div>
       ) : (
-        <ul>
+        <ul role="list">
           {reviews.map((review) => (
             <li key={review.id}>
               <Review review={review} />
