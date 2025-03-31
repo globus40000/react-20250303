@@ -43,8 +43,8 @@ type IReviewFormAction =
   | IDecrementRatingAction
   | IResetFormAction;
 
-const RATING_MIN = 1;
-const RATING_MAX = 5;
+export const RATING_MIN = 1;
+export const RATING_MAX = 5;
 
 const DEFAULT_FORM_VALUE: IReviewFormState = {
   user: "",

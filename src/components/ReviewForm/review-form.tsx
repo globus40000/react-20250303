@@ -1,5 +1,5 @@
 import { FC, FormEvent } from "react";
-import { useReviewForm } from "./use-review-form";
+import { RATING_MAX, RATING_MIN, useReviewForm } from "./use-review-form";
 import { Counter } from "../Counter/counter";
 
 export const ReviewForm: FC = () => {
@@ -52,6 +52,8 @@ export const ReviewForm: FC = () => {
             count={rating}
             onIncrement={incrementRating}
             onDecrement={decrementRating}
+            min={RATING_MIN}
+            max={RATING_MAX}
           />
         </div>
         <div>
