@@ -3,7 +3,7 @@ import { Restaurant } from "../Restaurant/restaurant";
 import { restaurants } from "../../mocks/restaurants";
 import { Tab } from "../Tab/tab";
 
-export const Restaurants: FC = () => {
+export const RestaurantsPage: FC = () => {
   const [selectedId, setSelectedId] = useState(restaurants[0]?.id);
   const selectedRestaurant = restaurants.find(({ id }) => id === selectedId);
 
