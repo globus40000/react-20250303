@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Button } from "../Button/button";
 
 interface ICounterProps {
   count: number;
@@ -17,13 +18,13 @@ export const Counter: FC<ICounterProps> = ({
 }) => {
   return (
     <div className="counter">
-      <button type="button" onClick={onIncrement} disabled={count === max}>
+      <Button type="button" onClick={onIncrement} disabled={count === max}>
         +
-      </button>
+      </Button>
       {count}
-      <button type="button" onClick={onDecrement} disabled={count === min}>
+      <Button type="button" onClick={onDecrement} disabled={count === min}>
         -
-      </button>
+      </Button>
     </div>
   );
 };

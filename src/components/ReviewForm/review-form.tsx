@@ -1,6 +1,7 @@
 import { FC, FormEvent } from "react";
 import { RATING_MAX, RATING_MIN, useReviewForm } from "./use-review-form";
 import { Counter } from "../Counter/counter";
+import { Button } from "../Button/button";
 
 export const ReviewForm: FC = () => {
   const {
@@ -57,8 +58,8 @@ export const ReviewForm: FC = () => {
           />
         </div>
         <div>
-          <button type="submit">Submit</button>
-          <button type="reset">Clear</button>
+          <Button type="submit">Submit</Button>
+          <Button type="reset">Clear</Button>
         </div>
       </form>
     </div>

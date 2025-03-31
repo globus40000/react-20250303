@@ -1,0 +1,21 @@
+.root {
+  font-size: 18px;
+  padding: 6px 18px;
+  border-radius: 22px;
+  cursor: pointer;
+  border-width: 1px;
+  border-style: solid;
+  background-color: aquamarine;
+  border-color: darkcyan;
+  color: black;
+}
+
+.root:hover {
+  color: darkcyan;
+}
+
+.root[disabled] {
+  color: rgba(0, 0, 0, 0.4);
+  border-color: aquamarine;
+  cursor: default;
+}

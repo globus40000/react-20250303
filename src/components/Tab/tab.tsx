@@ -1,4 +1,7 @@
 import { FC } from "react";
+import { Button } from "../Button/button";
+
+import styles from "./tab.module.css";
 
 interface ITabProps {
   title: string;
@@ -8,8 +11,13 @@ interface ITabProps {
 
 export const Tab: FC<ITabProps> = ({ title, onClick, isActive }) => {
   return (
-    <button type="button" disabled={isActive} onClick={onClick}>
+    <Button
+      type="button"
+      disabled={isActive}
+      onClick={onClick}
+      className={styles.root}
+    >
       {title}
-    </button>
+    </Button>
   );
 };
