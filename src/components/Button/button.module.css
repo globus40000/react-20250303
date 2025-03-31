@@ -1,7 +1,4 @@
 .root {
-  font-size: 18px;
-  padding: 6px 18px;
-  border-radius: 22px;
   cursor: pointer;
   border-width: 1px;
   border-style: solid;
@@ -18,4 +15,16 @@
   color: rgba(0, 0, 0, 0.4);
   border-color: aquamarine;
   cursor: default;
+}
+
+.default {
+  font-size: 16px;
+  padding: 5px 16px;
+  border-radius: 20px;
+}
+
+.big {
+  font-size: 18px;
+  padding: 6px 18px;
+  border-radius: 22px;
 }

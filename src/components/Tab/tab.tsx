@@ -16,6 +16,7 @@ export const Tab: FC<ITabProps> = ({ title, onClick, isActive }) => {
       disabled={isActive}
       onClick={onClick}
       className={styles.root}
+      sizeViewVariant="big"
     >
       {title}
     </Button>

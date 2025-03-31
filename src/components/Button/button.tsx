@@ -7,6 +7,7 @@ interface IButtonProps {
   type?: "submit" | "reset" | "button";
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  sizeViewVariant?: "default" | "big";
   className?: string;
 }
 
@@ -15,6 +16,7 @@ export const Button: FC<PropsWithChildren<IButtonProps>> = ({
   type,
   disabled,
   onClick,
+  sizeViewVariant = "default",
   className,
 }) => {
   return (
@@ -22,7 +24,10 @@ export const Button: FC<PropsWithChildren<IButtonProps>> = ({
       type={type}
       disabled={disabled}
       onClick={onClick}
-      className={classNames(styles.root, className)}
+      className={classNames(styles.root, className, {
+        [styles.default]: sizeViewVariant === "default",
+        [styles.big]: sizeViewVariant === "big",
+      })}
     >
       {children}
     </button>
