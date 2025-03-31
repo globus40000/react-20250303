@@ -57,8 +57,8 @@ export const ReviewForm: FC = () => {
           />
         </div>
         <div>
-          <input type="submit" />
-          <input type="reset" value="Clear" />
+          <button type="submit">Submit</button>
+          <button type="reset">Clear</button>
         </div>
       </form>
     </div>
