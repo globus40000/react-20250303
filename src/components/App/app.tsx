@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Layout } from "../Layout/layout";
 import { Restaurants } from "../Restaurants/restaurants";
 
+import "./reset.css";
 import "./app.css";
 
 export const App: FC = () => {
