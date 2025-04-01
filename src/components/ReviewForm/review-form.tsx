@@ -10,6 +10,9 @@ interface IReviewFormProps {
   className?: string;
 }
 
+const IS_NAME_REQUIRED = true;
+const IS_TEXT_REQUIRED = true;
+
 export const ReviewForm: FC<IReviewFormProps> = ({ className }) => {
   const {
     user,
@@ -30,12 +33,17 @@ export const ReviewForm: FC<IReviewFormProps> = ({ className }) => {
     <div className={classNames(styles.root, className)}>
       <form onSubmit={handleSubmit} onReset={resetForm}>
         <div className={styles.field}>
-          <label htmlFor="user">Name: </label>
+          <label
+            htmlFor="user"
+            className={classNames({ [styles.required]: IS_NAME_REQUIRED })}
+          >
+            Name:{" "}
+          </label>
           <input
             name="user"
             type="text"
             id="user"
-            required
+            required={IS_NAME_REQUIRED}
             onChange={(e) => {
               setUser(e.target.value);
             }}
@@ -43,11 +51,16 @@ export const ReviewForm: FC<IReviewFormProps> = ({ className }) => {
           />
         </div>
         <div className={styles.field}>
-          <label htmlFor="text">Text: </label>
+          <label
+            htmlFor="text"
+            className={classNames({ [styles.required]: IS_TEXT_REQUIRED })}
+          >
+            Text:{" "}
+          </label>
           <textarea
             name="text"
             id="text"
-            required
+            required={IS_TEXT_REQUIRED}
             onChange={(e) => {
               setText(e.target.value);
             }}

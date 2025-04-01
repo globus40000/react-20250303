@@ -1,8 +1,14 @@
 .root label {
-  width: 70px;
+  width: 80px;
   display: inline-block;
   text-align: right;
   padding-right: 10px;
+}
+
+.root label.required::before {
+  content: "*";
+  color: darkcyan;
+  margin-right: 4px;
 }
 
 .field {
