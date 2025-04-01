@@ -1,7 +1,8 @@
-import { FC } from "react";
+import { FC, use } from "react";
 import { IReview } from "../../types";
 import { Review } from "../Review/review";
 import { ReviewForm } from "../ReviewForm/review-form";
+import { AuthContextProvider } from "../AuthContext/provider";
 
 import styles from "./reviews.module.css";
 
@@ -11,6 +12,8 @@ interface IReviewsProps {
 }
 
 export const Reviews: FC<IReviewsProps> = ({ reviews, textNoReviews }) => {
+  const { authorized } = use(AuthContextProvider);
+
   return (
     <div className={styles.root}>
       <h3>Reviews</h3>
@@ -25,7 +28,7 @@ export const Reviews: FC<IReviewsProps> = ({ reviews, textNoReviews }) => {
           ))}
         </ul>
       )}
-      <ReviewForm className={styles.form} />
+      {authorized && <ReviewForm className={styles.form} />}
     </div>
   );
 };

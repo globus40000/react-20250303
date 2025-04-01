@@ -3,6 +3,10 @@
   align-items: center;
 }
 
-.theme {
+.auth {
   margin-left: auto;
+}
+
+.theme {
+  margin-left: 6px;
 }
