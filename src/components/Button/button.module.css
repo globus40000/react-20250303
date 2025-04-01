@@ -2,19 +2,36 @@
   cursor: pointer;
   border-width: 1px;
   border-style: solid;
+}
+
+.light {
   background-color: aquamarine;
   border-color: darkcyan;
   color: black;
 }
+.dark {
+  background-color: darkcyan;
+  border-color: darkgreen;
+  color: whitesmoke;
+}
 
-.root:hover {
+.root:hover.light {
   color: darkcyan;
+}
+.root:hover.dark {
+  color: rgba(245, 245, 245, 0.8);
 }
 
 .root[disabled] {
+  cursor: default;
+}
+.root[disabled].light {
   color: rgba(0, 0, 0, 0.4);
   border-color: aquamarine;
-  cursor: default;
+}
+.root[disabled].dark {
+  color: rgba(245, 245, 245, 0.4);
+  border-color: darkcyan;
 }
 
 .default {

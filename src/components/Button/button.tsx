@@ -1,5 +1,6 @@
-import { FC, MouseEventHandler, PropsWithChildren } from "react";
+import { FC, MouseEventHandler, PropsWithChildren, use } from "react";
 import classNames from "classnames";
+import { ThemeContextProvider } from "../ThemeContext/provider";
 
 import styles from "./button.module.css";
 
@@ -19,6 +20,8 @@ export const Button: FC<PropsWithChildren<IButtonProps>> = ({
   sizeViewVariant = "default",
   className,
 }) => {
+  const { theme } = use(ThemeContextProvider);
+
   return (
     <button
       type={type}
@@ -27,6 +30,8 @@ export const Button: FC<PropsWithChildren<IButtonProps>> = ({
       className={classNames(styles.root, className, {
         [styles.default]: sizeViewVariant === "default",
         [styles.big]: sizeViewVariant === "big",
+        [styles.light]: theme === "light",
+        [styles.dark]: theme === "dark",
       })}
     >
       {children}
