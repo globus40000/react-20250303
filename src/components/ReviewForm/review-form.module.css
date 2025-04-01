@@ -11,6 +11,11 @@
   margin-right: 4px;
 }
 
+.root input,
+.root textarea {
+  width: 220px;
+}
+
 .field {
   margin-bottom: 10px;
 }
