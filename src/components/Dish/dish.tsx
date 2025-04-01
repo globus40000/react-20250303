@@ -8,7 +8,7 @@ interface IDishProps {
 
 export const Dish: FC<IDishProps> = ({ dish }) => {
   return (
-    <div className="dish">
+    <div>
       {dish.name}
       <DishCounter min={0} max={5} />
     </div>
