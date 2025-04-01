@@ -24,9 +24,7 @@ export const RestaurantsPage: FC = () => {
           />
         ))}
       </div>
-      <div className="selected">
-        {selectedRestaurant && <Restaurant restaurant={selectedRestaurant} />}
-      </div>
+      {selectedRestaurant && <Restaurant restaurant={selectedRestaurant} />}
     </div>
   );
 };

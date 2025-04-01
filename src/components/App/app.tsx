@@ -8,12 +8,10 @@ import "./app.css";
 
 export const App: FC = () => {
   return (
-    <div className="app">
-      <ThemeContext>
-        <Layout>
-          <RestaurantsPage />
-        </Layout>
-      </ThemeContext>
-    </div>
+    <ThemeContext>
+      <Layout>
+        <RestaurantsPage />
+      </Layout>
+    </ThemeContext>
   );
 };
