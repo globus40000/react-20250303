@@ -2,8 +2,15 @@ import { FC, FormEvent } from "react";
 import { RATING_MAX, RATING_MIN, useReviewForm } from "./use-review-form";
 import { Counter } from "../Counter/counter";
 import { Button } from "../Button/button";
+import classNames from "classnames";
 
-export const ReviewForm: FC = () => {
+import styles from "./review-form.module.css";
+
+interface IReviewFormProps {
+  className?: string;
+}
+
+export const ReviewForm: FC<IReviewFormProps> = ({ className }) => {
   const {
     user,
     text,
@@ -20,9 +27,9 @@ export const ReviewForm: FC = () => {
   };
 
   return (
-    <div className="review-form">
+    <div className={classNames(styles.root, className)}>
       <form onSubmit={handleSubmit} onReset={resetForm}>
-        <div>
+        <div className={styles.field}>
           <label htmlFor="user">Name: </label>
           <input
             name="user"
@@ -35,7 +42,7 @@ export const ReviewForm: FC = () => {
             value={user}
           />
         </div>
-        <div>
+        <div className={styles.field}>
           <label htmlFor="text">Text: </label>
           <textarea
             name="text"
@@ -47,7 +54,7 @@ export const ReviewForm: FC = () => {
             value={text}
           />
         </div>
-        <div>
+        <div className={styles.field}>
           <label>Rating: </label>
           <Counter
             count={rating}
@@ -55,11 +62,16 @@ export const ReviewForm: FC = () => {
             onDecrement={decrementRating}
             min={RATING_MIN}
             max={RATING_MAX}
+            className={styles.rating}
           />
         </div>
-        <div>
-          <Button type="submit">Submit</Button>
-          <Button type="reset">Clear</Button>
+        <div className={styles.controls}>
+          <Button type="submit" className={styles.control}>
+            Submit
+          </Button>
+          <Button type="reset" className={styles.control}>
+            Clear
+          </Button>
         </div>
       </form>
     </div>

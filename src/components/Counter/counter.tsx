@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Button } from "../Button/button";
+import classNames from "classnames";
 
 import styles from "./counter.module.css";
 
@@ -9,6 +10,7 @@ interface ICounterProps {
   onDecrement: () => void;
   min?: number;
   max?: number;
+  className?: string;
 }
 
 export const Counter: FC<ICounterProps> = ({
@@ -17,9 +19,10 @@ export const Counter: FC<ICounterProps> = ({
   onDecrement,
   min,
   max,
+  className,
 }) => {
   return (
-    <div className={styles.root}>
+    <div className={classNames(styles.root, className)}>
       <Button type="button" onClick={onIncrement} disabled={count === max}>
         +
       </Button>

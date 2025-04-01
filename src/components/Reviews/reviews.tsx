@@ -3,6 +3,8 @@ import { IReview } from "../../types";
 import { Review } from "../Review/review";
 import { ReviewForm } from "../ReviewForm/review-form";
 
+import styles from "./reviews.module.css";
+
 interface IReviewsProps {
   reviews: IReview[];
   textNoReviews?: string;
@@ -10,7 +12,7 @@ interface IReviewsProps {
 
 export const Reviews: FC<IReviewsProps> = ({ reviews, textNoReviews }) => {
   return (
-    <div className="reviews">
+    <div className={styles.root}>
       <h3>Reviews</h3>
       {reviews.length === 0 && typeof textNoReviews === "string" ? (
         <div className="no-reviews">{textNoReviews}</div>
@@ -23,7 +25,7 @@ export const Reviews: FC<IReviewsProps> = ({ reviews, textNoReviews }) => {
           ))}
         </ul>
       )}
-      <ReviewForm />
+      <ReviewForm className={styles.form} />
     </div>
   );
 };

@@ -1,0 +1,22 @@
+.root label {
+  width: 70px;
+  display: inline-block;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.field {
+  margin-bottom: 10px;
+}
+
+.controls {
+  margin-top: 18px;
+}
+
+.control {
+  margin-right: 6px;
+}
+
+.rating {
+  display: inline-block;
+}
