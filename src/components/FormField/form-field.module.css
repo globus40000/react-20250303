@@ -1,0 +1,5 @@
+.required::before {
+  content: "*";
+  color: darkcyan;
+  margin-right: 4px;
+}

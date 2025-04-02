@@ -3,6 +3,7 @@ import { RATING_MAX, RATING_MIN, useReviewForm } from "./use-review-form";
 import { Counter } from "../Counter/counter";
 import { Button } from "../Button/button";
 import classNames from "classnames";
+import { FormField } from "../FormField/form-field";
 
 import styles from "./review-form.module.css";
 
@@ -35,43 +36,28 @@ export const ReviewForm: FC<IReviewFormProps> = ({ className }) => {
       onReset={resetForm}
       className={classNames(styles.root, className)}
     >
-      <div className={styles.field}>
-        <label
-          htmlFor="user"
-          className={classNames({ [styles.required]: IS_NAME_REQUIRED })}
-        >
-          Name:{" "}
-        </label>
-        <input
-          name="user"
-          type="text"
-          id="user"
-          required={IS_NAME_REQUIRED}
-          onChange={(e) => {
-            setUser(e.target.value);
-          }}
-          value={user}
-        />
-      </div>
-      <div className={styles.field}>
-        <label
-          htmlFor="text"
-          className={classNames({ [styles.required]: IS_TEXT_REQUIRED })}
-        >
-          Text:{" "}
-        </label>
-        <textarea
-          name="text"
-          id="text"
-          required={IS_TEXT_REQUIRED}
-          onChange={(e) => {
-            setText(e.target.value);
-          }}
-          value={text}
-        />
-      </div>
-      <div className={styles.field}>
-        <label>Rating: </label>
+      <FormField
+        className={styles.field}
+        label="Name"
+        name="user"
+        required={IS_NAME_REQUIRED}
+        onChange={(e) => {
+          setUser(e.target.value);
+        }}
+        value={user}
+      />
+      <FormField
+        className={styles.field}
+        label="Text"
+        name="text"
+        required={IS_TEXT_REQUIRED}
+        onChange={(e) => {
+          setText(e.target.value);
+        }}
+        value={text}
+        isTextArea
+      />
+      <FormField className={styles.field} label="Rating">
         <Counter
           count={rating}
           onIncrement={incrementRating}
@@ -80,7 +66,7 @@ export const ReviewForm: FC<IReviewFormProps> = ({ className }) => {
           max={RATING_MAX}
           className={styles.rating}
         />
-      </div>
+      </FormField>
       <div className={styles.controls}>
         <Button type="submit" className={styles.control}>
           Submit
