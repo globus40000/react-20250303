@@ -1,0 +1,12 @@
+.root {
+  display: flex;
+  align-items: center;
+}
+
+.auth {
+  margin-left: auto;
+}
+
+.theme {
+  margin-left: 6px;
+}

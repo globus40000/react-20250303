@@ -12,8 +12,12 @@ export const DishCounter: FC<IDishCounterProps> = ({ initial, min, max }) => {
   const { count, increment, decrement } = useCount(initial, min, max);
 
   return (
-    <div className="dish-counter">
-      <Counter count={count} onIncrement={increment} onDecrement={decrement} />
-    </div>
+    <Counter
+      count={count}
+      onIncrement={increment}
+      onDecrement={decrement}
+      min={min}
+      max={max}
+    />
   );
 };

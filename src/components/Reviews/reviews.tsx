@@ -1,7 +1,10 @@
-import { FC } from "react";
+import { FC, use } from "react";
 import { IReview } from "../../types";
 import { Review } from "../Review/review";
 import { ReviewForm } from "../ReviewForm/review-form";
+import { AuthContextProvider } from "../AuthContext/provider";
+
+import styles from "./reviews.module.css";
 
 interface IReviewsProps {
   reviews: IReview[];
@@ -9,13 +12,15 @@ interface IReviewsProps {
 }
 
 export const Reviews: FC<IReviewsProps> = ({ reviews, textNoReviews }) => {
+  const { isAuthorized } = use(AuthContextProvider);
+
   return (
-    <div className="reviews">
+    <div className={styles.root}>
       <h3>Reviews</h3>
       {reviews.length === 0 && typeof textNoReviews === "string" ? (
-        <div className="no-reviews">{textNoReviews}</div>
+        <div>{textNoReviews}</div>
       ) : (
-        <ul>
+        <ul role="list">
           {reviews.map((review) => (
             <li key={review.id}>
               <Review review={review} />
@@ -23,7 +28,7 @@ export const Reviews: FC<IReviewsProps> = ({ reviews, textNoReviews }) => {
           ))}
         </ul>
       )}
-      <ReviewForm />
+      {isAuthorized && <ReviewForm className={styles.form} />}
     </div>
   );
 };

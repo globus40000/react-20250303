@@ -18,3 +18,7 @@ export interface IRestaurant {
   menu: IDish[];
   reviews: IReview[];
 }
+
+export interface IUser {
+  name: string;
+}

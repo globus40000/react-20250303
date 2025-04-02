@@ -1,8 +1,20 @@
 import { FC, FormEvent } from "react";
-import { useReviewForm } from "./use-review-form";
+import { RATING_MAX, RATING_MIN, useReviewForm } from "./use-review-form";
 import { Counter } from "../Counter/counter";
+import { Button } from "../Button/button";
+import classNames from "classnames";
+import { FormField } from "../FormField/form-field";
 
-export const ReviewForm: FC = () => {
+import styles from "./review-form.module.css";
+
+interface IReviewFormProps {
+  className?: string;
+}
+
+const IS_NAME_REQUIRED = true;
+const IS_TEXT_REQUIRED = true;
+
+export const ReviewForm: FC<IReviewFormProps> = ({ className }) => {
   const {
     user,
     text,
@@ -19,46 +31,50 @@ export const ReviewForm: FC = () => {
   };
 
   return (
-    <div className="review-form">
-      <form onSubmit={handleSubmit} onReset={resetForm}>
-        <div>
-          <label htmlFor="user">Name: </label>
-          <input
-            name="user"
-            type="text"
-            id="user"
-            required
-            onChange={(e) => {
-              setUser(e.target.value);
-            }}
-            value={user}
-          />
-        </div>
-        <div>
-          <label htmlFor="text">Text: </label>
-          <textarea
-            name="text"
-            id="text"
-            required
-            onChange={(e) => {
-              setText(e.target.value);
-            }}
-            value={text}
-          />
-        </div>
-        <div>
-          <label>Rating: </label>
-          <Counter
-            count={rating}
-            onIncrement={incrementRating}
-            onDecrement={decrementRating}
-          />
-        </div>
-        <div>
-          <input type="submit" />
-          <input type="reset" value="Clear" />
-        </div>
-      </form>
-    </div>
+    <form
+      onSubmit={handleSubmit}
+      onReset={resetForm}
+      className={classNames(styles.root, className)}
+    >
+      <FormField
+        className={styles.field}
+        label="Name"
+        name="user"
+        required={IS_NAME_REQUIRED}
+        onChange={(e) => {
+          setUser(e.target.value);
+        }}
+        value={user}
+      />
+      <FormField
+        className={styles.field}
+        label="Text"
+        name="text"
+        required={IS_TEXT_REQUIRED}
+        onChange={(e) => {
+          setText(e.target.value);
+        }}
+        value={text}
+        isTextArea
+      />
+      <FormField className={styles.field} label="Rating">
+        <Counter
+          count={rating}
+          onIncrement={incrementRating}
+          onDecrement={decrementRating}
+          min={RATING_MIN}
+          max={RATING_MAX}
+          className={styles.rating}
+        />
+      </FormField>
+      <div className={styles.controls}>
+        <Button type="submit" className={styles.control}>
+          Submit
+        </Button>
+        <Button type="reset" className={styles.control}>
+          Clear
+        </Button>
+      </div>
+    </form>
   );
 };

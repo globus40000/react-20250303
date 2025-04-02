@@ -8,5 +8,5 @@ interface IReviewProps {
 export const Review: FC<IReviewProps> = ({ review }) => {
   const { user, text, rating } = review;
 
-  return <div className="review">{`${user}: ${String(rating)}, ${text}`}</div>;
+  return <div>{`${user}: ${String(rating)}, ${text}`}</div>;
 };
