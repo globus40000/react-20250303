@@ -8,12 +8,12 @@ interface IDishProps {
 }
 
 export const Dish: FC<IDishProps> = ({ dish }) => {
-  const { authorized } = use(AuthContextProvider);
+  const { isAuthorized } = use(AuthContextProvider);
 
   return (
     <div>
       {dish.name}
-      {authorized && <DishCounter min={0} max={5} />}
+      {isAuthorized && <DishCounter min={0} max={5} />}
     </div>
   );
 };

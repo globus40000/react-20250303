@@ -12,7 +12,7 @@ interface IReviewsProps {
 }
 
 export const Reviews: FC<IReviewsProps> = ({ reviews, textNoReviews }) => {
-  const { authorized } = use(AuthContextProvider);
+  const { isAuthorized } = use(AuthContextProvider);
 
   return (
     <div className={styles.root}>
@@ -28,7 +28,7 @@ export const Reviews: FC<IReviewsProps> = ({ reviews, textNoReviews }) => {
           ))}
         </ul>
       )}
-      {authorized && <ReviewForm className={styles.form} />}
+      {isAuthorized && <ReviewForm className={styles.form} />}
     </div>
   );
 };

@@ -9,11 +9,11 @@ interface IToggleAuthProps {
 }
 
 export const ToggleAuth: FC<IToggleAuthProps> = ({ className }) => {
-  const { authorized, user, login, logout } = use(AuthContextProvider);
+  const { isAuthorized, user, login, logout } = use(AuthContextProvider);
 
   return (
     <div className={className}>
-      {authorized ? (
+      {isAuthorized ? (
         <div>
           {user?.name}
           <Button onClick={logout} className={styles.logout}>

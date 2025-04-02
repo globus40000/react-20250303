@@ -2,12 +2,12 @@ import { useState } from "react";
 import { IUser } from "../../types";
 import { user as mockUser } from "../../mocks/user";
 
-const isAuthorized = (user: IUser | null) => Boolean(user);
+const getIsAuthorized = (user: IUser | null) => Boolean(user);
 
 export const useAuth = () => {
   const [user, setUser] = useState<IUser | null>(null);
 
-  const authorized = isAuthorized(user);
+  const isAuthorized = getIsAuthorized(user);
 
   const login = () => {
     setUser(mockUser);
@@ -17,5 +17,5 @@ export const useAuth = () => {
     setUser(null);
   };
 
-  return { authorized, user, login, logout };
+  return { isAuthorized, user, login, logout };
 };

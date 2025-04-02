@@ -2,14 +2,14 @@ import { createContext } from "react";
 import { IUser } from "../../types";
 
 interface IAuthContextValue {
-  authorized: boolean;
+  isAuthorized: boolean;
   user: IUser | null;
   login: () => void;
   logout: () => void;
 }
 
 export const AuthContextProvider = createContext<IAuthContextValue>({
-  authorized: false,
+  isAuthorized: false,
   user: null,
   login: () => {
     console.warn("Can not login");
