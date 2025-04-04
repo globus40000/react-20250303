@@ -1,14 +1,14 @@
 import { FC, use } from "react";
 import { IDish } from "../../types";
 import { DishCounter } from "../DishCounter/dish-counter";
-import { AuthContextProvider } from "../AuthContext/provider";
+import { AuthContext } from "../AuthContextProvider/auth-context";
 
 interface IDishProps {
   dish: IDish;
 }
 
 export const Dish: FC<IDishProps> = ({ dish }) => {
-  const { isAuthorized } = use(AuthContextProvider);
+  const { isAuthorized } = use(AuthContext);
 
   return (
     <div>

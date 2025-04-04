@@ -2,7 +2,7 @@ import { FC, use } from "react";
 import { IReview } from "../../types";
 import { Review } from "../Review/review";
 import { ReviewForm } from "../ReviewForm/review-form";
-import { AuthContextProvider } from "../AuthContext/provider";
+import { AuthContext } from "../AuthContextProvider/auth-context";
 
 import styles from "./reviews.module.css";
 
@@ -12,7 +12,7 @@ interface IReviewsProps {
 }
 
 export const Reviews: FC<IReviewsProps> = ({ reviews, textNoReviews }) => {
-  const { isAuthorized } = use(AuthContextProvider);
+  const { isAuthorized } = use(AuthContext);
 
   return (
     <div className={styles.root}>
