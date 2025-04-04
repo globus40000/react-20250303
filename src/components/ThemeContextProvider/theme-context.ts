@@ -7,7 +7,7 @@ interface IThemeContextValue {
   toggleTheme: () => void;
 }
 
-export const ThemeContextProvider = createContext<IThemeContextValue>({
+export const ThemeContext = createContext<IThemeContextValue>({
   theme: "light",
   toggleTheme: () => {
     console.warn("Can not toggle theme");

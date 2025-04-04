@@ -1,6 +1,6 @@
 import { FC, MouseEventHandler, PropsWithChildren, use } from "react";
 import classNames from "classnames";
-import { ThemeContextProvider } from "../ThemeContext/provider";
+import { ThemeContext } from "../ThemeContextProvider/theme-context";
 
 import styles from "./button.module.css";
 
@@ -20,7 +20,7 @@ export const Button: FC<PropsWithChildren<IButtonProps>> = ({
   sizeViewVariant = "default",
   className,
 }) => {
-  const { theme } = use(ThemeContextProvider);
+  const { theme } = use(ThemeContext);
 
   return (
     <button

@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { Theme } from "./provider";
+import { Theme } from "./theme-context";
 
 export const useTheme = () => {
   const [theme, setTheme] = useState<Theme>("light");
