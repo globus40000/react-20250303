@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { ICartItem } from "../../redux/entities/cart/slice";
 import classNames from "classnames";
+import { CartItemContainer } from "../CartItem/cart-item-container";
 
 import styles from "./cart.module.css";
 
@@ -15,9 +16,9 @@ export const Cart: FC<ICartProps> = ({ items, className }) => {
       <h3>Cart</h3>
       {items.length > 0 ? (
         <ul role="list">
-          {items.map(({ id, amount }) => (
+          {items.map(({ id }) => (
             <li key={id}>
-              {id} - {amount}
+              <CartItemContainer id={id} />
             </li>
           ))}
         </ul>
