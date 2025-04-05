@@ -10,12 +10,16 @@ export interface ICartItem {
 
 const initialState: ICartState = {};
 
+export const AMOUNT_MIN = 0;
+
+export const AMOUNT_MAX = 5;
+
 export const cartSlice = createSlice({
   name: "cartSlice",
   initialState,
   reducers: {
     addToCart: (state, { payload }: PayloadAction<Identifier>) => {
-      state[payload] = (state[payload] || 0) + 1;
+      state[payload] = Math.min((state[payload] || AMOUNT_MIN) + 1, AMOUNT_MAX);
     },
     removeFromCart: (state, { payload }: PayloadAction<Identifier>) => {
       if (!state[payload]) {
@@ -24,7 +28,7 @@ export const cartSlice = createSlice({
 
       state[payload] = state[payload] - 1;
 
-      if (state[payload] <= 0) {
+      if (state[payload] <= AMOUNT_MIN) {
         // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
         delete state[payload];
       }
