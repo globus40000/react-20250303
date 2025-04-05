@@ -1,19 +1,20 @@
 import { FC } from "react";
 import { Counter } from "../Counter/counter";
-import { useCount } from "./use-count";
+import { useAmount } from "./use-amount";
+import { Identifier } from "../../types";
 
 interface IDishCounterProps {
-  initial?: number;
+  id: Identifier;
   min?: number;
   max?: number;
 }
 
-export const DishCounter: FC<IDishCounterProps> = ({ initial, min, max }) => {
-  const { count, increment, decrement } = useCount(initial, min, max);
+export const DishCounter: FC<IDishCounterProps> = ({ id, min, max }) => {
+  const { amount, increment, decrement } = useAmount(id);
 
   return (
     <Counter
-      count={count}
+      count={amount}
       onIncrement={increment}
       onDecrement={decrement}
       min={min}

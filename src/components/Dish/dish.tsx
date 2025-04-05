@@ -9,11 +9,12 @@ interface IDishProps {
 
 export const Dish: FC<IDishProps> = ({ dish }) => {
   const { isAuthorized } = use(AuthContext);
+  const { id, name } = dish;
 
   return (
     <div>
-      {dish.name}
-      {isAuthorized && <DishCounter min={0} max={5} />}
+      {name}
+      {isAuthorized && <DishCounter id={id} />}
     </div>
   );
 };
