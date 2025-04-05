@@ -3,7 +3,7 @@ import { Identifier } from "../../../types";
 
 type ICartState = Record<Identifier, number>;
 
-interface ICartItem {
+export interface ICartItem {
   id: Identifier;
   amount: number;
 }

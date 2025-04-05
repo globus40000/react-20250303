@@ -1,17 +1,15 @@
 import { FC } from "react";
-import { useSelector } from "react-redux";
-import { selectCartItems } from "../../redux/entities/cart/slice";
+import { ICartItem } from "../../redux/entities/cart/slice";
 import classNames from "classnames";
 
 import styles from "./cart.module.css";
 
 interface ICartProps {
+  items: ICartItem[];
   className?: string;
 }
 
-export const Cart: FC<ICartProps> = ({ className }) => {
-  const items = useSelector(selectCartItems);
-
+export const Cart: FC<ICartProps> = ({ items, className }) => {
   return (
     <div className={classNames(styles.root, className)}>
       <h3>Cart</h3>
