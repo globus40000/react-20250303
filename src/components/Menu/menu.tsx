@@ -1,23 +1,23 @@
 import { FC } from "react";
-import { IDish } from "../../types";
-import { Dish } from "../Dish/dish";
+import { Identifier } from "../../types";
 import classNames from "classnames";
+import { DishContainer } from "../Dish/dish-container";
 
 import styles from "./menu.module.css";
 
 interface IMenuProps {
-  menu: IDish[];
+  dishesIds: Identifier[];
   className?: string;
 }
 
-export const Menu: FC<IMenuProps> = ({ menu, className }) => {
+export const Menu: FC<IMenuProps> = ({ dishesIds, className }) => {
   return (
     <div className={classNames(styles.root, className)}>
       <h3>Menu</h3>
       <ul role="list">
-        {menu.map((dish) => (
-          <li key={dish.id}>
-            <Dish dish={dish} />
+        {dishesIds.map((id) => (
+          <li key={id}>
+            <DishContainer id={id} />
           </li>
         ))}
       </ul>

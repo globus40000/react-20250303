@@ -1,12 +1,17 @@
 import { FC } from "react";
-import { IReview } from "../../types";
+import { IReviewNormalized } from "../../types";
+import { UserNameContainer } from "../UserName/user-name.container";
 
 interface IReviewProps {
-  review: IReview;
+  review: IReviewNormalized;
 }
 
 export const Review: FC<IReviewProps> = ({ review }) => {
-  const { user, text, rating } = review;
+  const { userId, text, rating } = review;
 
-  return <div>{`${user}: ${String(rating)}, ${text}`}</div>;
+  return (
+    <div>
+      <UserNameContainer id={userId} />: {`${String(rating)}, ${text}`}
+    </div>
+  );
 };

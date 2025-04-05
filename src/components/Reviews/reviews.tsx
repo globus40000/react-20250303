@@ -1,29 +1,29 @@
 import { FC, use } from "react";
-import { IReview } from "../../types";
-import { Review } from "../Review/review";
+import { Identifier } from "../../types";
 import { ReviewForm } from "../ReviewForm/review-form";
 import { AuthContext } from "../AuthContextProvider/auth-context";
 
 import styles from "./reviews.module.css";
+import { ReviewContainer } from "../Review/review-container";
 
 interface IReviewsProps {
-  reviews: IReview[];
+  reviewsIds: Identifier[];
   textNoReviews?: string;
 }
 
-export const Reviews: FC<IReviewsProps> = ({ reviews, textNoReviews }) => {
+export const Reviews: FC<IReviewsProps> = ({ reviewsIds, textNoReviews }) => {
   const { isAuthorized } = use(AuthContext);
 
   return (
     <div className={styles.root}>
       <h3>Reviews</h3>
-      {reviews.length === 0 && typeof textNoReviews === "string" ? (
+      {reviewsIds.length === 0 && typeof textNoReviews === "string" ? (
         <div>{textNoReviews}</div>
       ) : (
         <ul role="list">
-          {reviews.map((review) => (
-            <li key={review.id}>
-              <Review review={review} />
+          {reviewsIds.map((id) => (
+            <li key={id}>
+              <ReviewContainer id={id} />
             </li>
           ))}
         </ul>

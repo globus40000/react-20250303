@@ -1,12 +1,12 @@
 import { FC } from "react";
-import { IRestaurant } from "../../types";
+import { IRestaurantNormalized } from "../../types";
 import { Menu } from "../Menu/menu";
 import { Reviews } from "../Reviews/reviews";
 
 import styles from "./restaurant.module.css";
 
 interface IRestaurantProps {
-  restaurant: IRestaurant;
+  restaurant: IRestaurantNormalized;
 }
 
 export const Restaurant: FC<IRestaurantProps> = ({ restaurant }) => {
@@ -15,8 +15,8 @@ export const Restaurant: FC<IRestaurantProps> = ({ restaurant }) => {
   return (
     <div className={styles.root}>
       <h2>{name}</h2>
-      <Menu menu={menu} className={styles.menu} />
-      <Reviews reviews={reviews} textNoReviews="No reviews yet." />
+      <Menu dishesIds={menu} className={styles.menu} />
+      <Reviews reviewsIds={reviews} textNoReviews="No reviews yet." />
     </div>
   );
 };
