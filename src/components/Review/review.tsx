@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { IReviewNormalized } from "../../types";
-import { UserNameContainer } from "../UserName/user-name.container";
+import { UserNameContainer } from "../UserName/user-name-container";
 
 interface IReviewProps {
   review: IReviewNormalized;
