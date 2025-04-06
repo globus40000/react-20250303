@@ -5,6 +5,8 @@ import { AuthContextProvider } from "../AuthContextProvider/auth-context-provide
 import { Provider } from "react-redux";
 import { store } from "../../redux/store";
 import { RestaurantsPageContainer } from "../RestaurantsPage/restaurants-page-container";
+import { BrowserRouter, Route, Routes } from "react-router";
+import { HomePage } from "../../pages/HomePage/home-page";
 
 import "./reset.css";
 import "./app.css";
@@ -14,9 +16,17 @@ export const App: FC = () => {
     <Provider store={store}>
       <AuthContextProvider>
         <ThemeContextProvider>
-          <Layout>
-            <RestaurantsPageContainer />
-          </Layout>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route index element={<HomePage />} />
+                <Route
+                  path="/restaurants"
+                  element={<RestaurantsPageContainer />}
+                />
+              </Route>
+            </Routes>
+          </BrowserRouter>
         </ThemeContextProvider>
       </AuthContextProvider>
     </Provider>
