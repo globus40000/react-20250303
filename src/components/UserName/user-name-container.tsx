@@ -9,7 +9,9 @@ interface IUserNameContainerProps {
 }
 
 export const UserNameContainer: FC<IUserNameContainerProps> = ({ id }) => {
-  const user = useSelector((state: IRootState) => selectUserById(state, id));
+  const user = useSelector<IRootState, ReturnType<typeof selectUserById>>(
+    (state) => selectUserById(state, id)
+  );
 
   if (!user) {
     return null;

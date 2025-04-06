@@ -10,8 +10,8 @@ interface IReviewContainerProps {
 }
 
 export const ReviewContainer: FC<IReviewContainerProps> = ({ id }) => {
-  const review = useSelector((state: IRootState) =>
-    selectReviewById(state, id)
+  const review = useSelector<IRootState, ReturnType<typeof selectReviewById>>(
+    (state) => selectReviewById(state, id)
   );
 
   if (!review) {

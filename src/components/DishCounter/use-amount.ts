@@ -12,7 +12,9 @@ export const useAmount = (id: Identifier) => {
   const dispatch = useDispatch();
 
   const amount =
-    useSelector((state: IRootState) => selectAmountByDishId(state, id)) ?? 0;
+    useSelector<IRootState, ReturnType<typeof selectAmountByDishId>>((state) =>
+      selectAmountByDishId(state, id)
+    ) ?? 0;
 
   const increment = useCallback(() => dispatch(addToCart(id)), [dispatch, id]);
 

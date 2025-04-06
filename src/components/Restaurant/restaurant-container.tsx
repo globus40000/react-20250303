@@ -10,9 +10,10 @@ interface IRestaurantContainerProps {
 }
 
 export const RestaurantContainer: FC<IRestaurantContainerProps> = ({ id }) => {
-  const restaurant = useSelector((state: IRootState) =>
-    selectRestaurantById(state, id)
-  );
+  const restaurant = useSelector<
+    IRootState,
+    ReturnType<typeof selectRestaurantById>
+  >((state) => selectRestaurantById(state, id));
 
   if (!restaurant) {
     return null;

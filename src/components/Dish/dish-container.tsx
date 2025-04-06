@@ -10,7 +10,9 @@ interface IDishContainerProps {
 }
 
 export const DishContainer: FC<IDishContainerProps> = ({ id }) => {
-  const dish = useSelector((state: IRootState) => selectDishById(state, id));
+  const dish = useSelector<IRootState, ReturnType<typeof selectDishById>>(
+    (state) => selectDishById(state, id)
+  );
 
   if (!dish) {
     return null;
