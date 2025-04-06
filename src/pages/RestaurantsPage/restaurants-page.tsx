@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
-import { RestaurantContainer } from "../Restaurant/restaurant-container";
-import { RestaurantTabContainer } from "../RestaurantTab/restaurant-tab-container";
+import { RestaurantContainer } from "../../components/Restaurant/restaurant-container";
+import { RestaurantTabContainer } from "../../components/RestaurantTab/restaurant-tab-container";
 import { Identifier } from "../../types";
 
 import styles from "./restaurants-page.module.css";

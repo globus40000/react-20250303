@@ -4,7 +4,7 @@ import { ThemeContextProvider } from "../ThemeContextProvider/theme-context-prov
 import { AuthContextProvider } from "../AuthContextProvider/auth-context-provider";
 import { Provider } from "react-redux";
 import { store } from "../../redux/store";
-import { RestaurantsPageContainer } from "../RestaurantsPage/restaurants-page-container";
+import { RestaurantsPageContainer } from "../../pages/RestaurantsPage/restaurants-page-container";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { HomePage } from "../../pages/HomePage/home-page";
 
