@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { IUser } from "../../types";
 import { user as mockUser } from "../../mocks/user";
 
@@ -9,13 +9,13 @@ export const useAuth = () => {
 
   const isAuthorized = getIsAuthorized(user);
 
-  const login = () => {
+  const login = useCallback(() => {
     setUser(mockUser);
-  };
+  }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setUser(null);
-  };
+  }, []);
 
   return { isAuthorized, user, login, logout };
 };

@@ -8,7 +8,7 @@ interface IAuthContextValue {
   logout: () => void;
 }
 
-export const AuthContextProvider = createContext<IAuthContextValue>({
+export const AuthContext = createContext<IAuthContextValue>({
   isAuthorized: false,
   user: null,
   login: () => {

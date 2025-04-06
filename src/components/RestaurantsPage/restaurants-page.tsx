@@ -1,22 +1,27 @@
 import { FC, useState } from "react";
-import { Restaurant } from "../Restaurant/restaurant";
-import { restaurants } from "../../mocks/restaurants";
-import { Tab } from "../Tab/tab";
+import { RestaurantContainer } from "../Restaurant/restaurant-container";
+import { RestaurantTabContainer } from "../RestaurantTab/restaurant-tab-container";
+import { Identifier } from "../../types";
 
 import styles from "./restaurants-page.module.css";
 
-export const RestaurantsPage: FC = () => {
-  const [selectedId, setSelectedId] = useState(restaurants[0]?.id);
-  const selectedRestaurant = restaurants.find(({ id }) => id === selectedId);
+interface IRestaurantsPageProps {
+  restaurantsIds: Identifier[];
+}
+
+export const RestaurantsPage: FC<IRestaurantsPageProps> = ({
+  restaurantsIds,
+}) => {
+  const [selectedId, setSelectedId] = useState(restaurantsIds[0]);
 
   return (
     <div className={styles.root}>
       <h1>Restaurants</h1>
       <div className={styles.tabs}>
-        {restaurants.map(({ id, name }) => (
-          <Tab
+        {restaurantsIds.map((id) => (
+          <RestaurantTabContainer
             key={id}
-            title={name}
+            id={id}
             isActive={id === selectedId}
             onClick={() => {
               setSelectedId(id);
@@ -24,7 +29,7 @@ export const RestaurantsPage: FC = () => {
           />
         ))}
       </div>
-      {selectedRestaurant && <Restaurant restaurant={selectedRestaurant} />}
+      {selectedId && <RestaurantContainer id={selectedId} />}
     </div>
   );
 };

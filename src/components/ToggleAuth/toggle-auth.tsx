@@ -1,6 +1,6 @@
 import { FC, use } from "react";
 import { Button } from "../Button/button";
-import { AuthContextProvider } from "../AuthContext/provider";
+import { AuthContext } from "../AuthContextProvider/auth-context";
 
 import styles from "./toggle-auth.module.css";
 
@@ -9,7 +9,7 @@ interface IToggleAuthProps {
 }
 
 export const ToggleAuth: FC<IToggleAuthProps> = ({ className }) => {
-  const { isAuthorized, user, login, logout } = use(AuthContextProvider);
+  const { isAuthorized, user, login, logout } = use(AuthContext);
 
   return (
     <div className={className}>

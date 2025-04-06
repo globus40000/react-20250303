@@ -1,23 +1,23 @@
 import { FC } from "react";
 import { Counter } from "../Counter/counter";
-import { useCount } from "./use-count";
+import { useAmount } from "./use-amount";
+import { Identifier } from "../../types";
+import { AMOUNT_MAX, AMOUNT_MIN } from "../../redux/entities/cart/slice";
 
 interface IDishCounterProps {
-  initial?: number;
-  min?: number;
-  max?: number;
+  id: Identifier;
 }
 
-export const DishCounter: FC<IDishCounterProps> = ({ initial, min, max }) => {
-  const { count, increment, decrement } = useCount(initial, min, max);
+export const DishCounter: FC<IDishCounterProps> = ({ id }) => {
+  const { amount, increment, decrement } = useAmount(id);
 
   return (
     <Counter
-      count={count}
+      count={amount}
       onIncrement={increment}
       onDecrement={decrement}
-      min={min}
-      max={max}
+      min={AMOUNT_MIN}
+      max={AMOUNT_MAX}
     />
   );
 };

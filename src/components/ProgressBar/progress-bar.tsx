@@ -1,13 +1,13 @@
 import { FC, use } from "react";
 import { useScrollPercent } from "./use-scroll-percent";
-import { ThemeContextProvider } from "../ThemeContext/provider";
+import { ThemeContext } from "../ThemeContextProvider/theme-context";
 import classNames from "classnames";
 
 import styles from "./progress-bar.module.css";
 
 export const ProgressBar: FC = () => {
   const scrollPercent = useScrollPercent();
-  const { theme } = use(ThemeContextProvider);
+  const { theme } = use(ThemeContext);
 
   return (
     <div

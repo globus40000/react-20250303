@@ -1,20 +1,24 @@
 import { FC } from "react";
 import { Layout } from "../Layout/layout";
-import { RestaurantsPage } from "../RestaurantsPage/restaurants-page";
-import { ThemeContext } from "../ThemeContext/theme-context";
-import { AuthContext } from "../AuthContext/auth-context";
+import { ThemeContextProvider } from "../ThemeContextProvider/theme-context-provider";
+import { AuthContextProvider } from "../AuthContextProvider/auth-context-provider";
+import { Provider } from "react-redux";
+import { store } from "../../redux/store";
+import { RestaurantsPageContainer } from "../RestaurantsPage/restaurants-page-container";
 
 import "./reset.css";
 import "./app.css";
 
 export const App: FC = () => {
   return (
-    <AuthContext>
-      <ThemeContext>
-        <Layout>
-          <RestaurantsPage />
-        </Layout>
-      </ThemeContext>
-    </AuthContext>
+    <Provider store={store}>
+      <AuthContextProvider>
+        <ThemeContextProvider>
+          <Layout>
+            <RestaurantsPageContainer />
+          </Layout>
+        </ThemeContextProvider>
+      </AuthContextProvider>
+    </Provider>
   );
 };
