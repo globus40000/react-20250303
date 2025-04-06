@@ -1,22 +1,22 @@
 import { FC } from "react";
-import { ICartItem } from "../../redux/entities/cart/slice";
 import classNames from "classnames";
 import { DishContainer } from "../Dish/dish-container";
+import { Identifier } from "../../types";
 
 import styles from "./cart.module.css";
 
 interface ICartProps {
-  items: ICartItem[];
+  dishesIds: Identifier[];
   className?: string;
 }
 
-export const Cart: FC<ICartProps> = ({ items, className }) => {
+export const Cart: FC<ICartProps> = ({ dishesIds, className }) => {
   return (
     <div className={classNames(styles.root, className)}>
       <h3>Cart</h3>
-      {items.length > 0 ? (
+      {dishesIds.length > 0 ? (
         <ul role="list">
-          {items.map(({ id }) => (
+          {dishesIds.map((id) => (
             <li key={id}>
               <DishContainer id={id} />
             </li>

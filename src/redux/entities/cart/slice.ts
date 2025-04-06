@@ -3,11 +3,6 @@ import { Identifier } from "../../../types";
 
 type ICartState = Record<Identifier, number>;
 
-export interface ICartItem {
-  id: Identifier;
-  amount: number;
-}
-
 const initialState: ICartState = {};
 
 export const AMOUNT_MIN = 0;
@@ -35,12 +30,8 @@ export const cartSlice = createSlice({
     },
   },
   selectors: {
-    selectCartItems: (state) => {
-      return Object.keys(state).reduce<ICartItem[]>((acc, id) => {
-        acc.push({ id, amount: state[id] });
-
-        return acc;
-      }, []);
+    selectCartDishesIds: (state) => {
+      return Object.keys(state);
     },
     selectAmountByDishId: (state, id: Identifier): number | undefined => {
       return state[id];
@@ -48,6 +39,7 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { selectCartItems, selectAmountByDishId } = cartSlice.selectors;
+export const { selectCartDishesIds, selectAmountByDishId } =
+  cartSlice.selectors;
 
 export const { addToCart, removeFromCart } = cartSlice.actions;
