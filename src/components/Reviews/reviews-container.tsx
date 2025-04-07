@@ -1,15 +1,15 @@
 import { FC } from "react";
+import { Reviews } from "./reviews";
 import { Identifier } from "../../types";
 import { useSelector } from "react-redux";
-import { selectRestaurantById } from "../../redux/entities/restaurant/slice";
-import { Restaurant } from "./restaurant";
 import { IRootState } from "../../redux/store";
+import { selectRestaurantById } from "../../redux/entities/restaurant/slice";
 
-interface IRestaurantContainerProps {
+interface IReviewsContainerProps {
   id: Identifier;
 }
 
-export const RestaurantContainer: FC<IRestaurantContainerProps> = ({ id }) => {
+export const ReviewsContainer: FC<IReviewsContainerProps> = ({ id }) => {
   const restaurant = useSelector<
     IRootState,
     ReturnType<typeof selectRestaurantById>
@@ -19,5 +19,7 @@ export const RestaurantContainer: FC<IRestaurantContainerProps> = ({ id }) => {
     return null;
   }
 
-  return <Restaurant restaurant={restaurant} />;
+  const { reviews } = restaurant;
+
+  return <Reviews reviewsIds={reviews} textNoReviews="No reviews yet." />;
 };
