@@ -8,6 +8,7 @@ import { RestaurantsPageContainer } from "../../pages/RestaurantsPage/restaurant
 import { BrowserRouter, Route, Routes } from "react-router";
 import { HomePage } from "../../pages/HomePage/home-page";
 import { RestaurantPage } from "../../pages/RestaurantPage/restaurant-page";
+import { NotFoundPage } from "../../pages/NotFoundPage/not-found-page";
 
 import "./reset.css";
 import "./app.css";
@@ -27,6 +28,7 @@ export const App: FC = () => {
                 >
                   <Route path=":restaurantId" element={<RestaurantPage />} />
                 </Route>
+                <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>
           </BrowserRouter>
