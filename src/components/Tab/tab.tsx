@@ -1,24 +1,23 @@
 import { FC } from "react";
-import { Button } from "../Button/button";
+import { NavLink } from "react-router";
+import classNames from "classnames";
 
 import styles from "./tab.module.css";
 
 interface ITabProps {
   title: string;
-  onClick: () => void;
-  isActive: boolean;
+  to: string;
 }
 
-export const Tab: FC<ITabProps> = ({ title, onClick, isActive }) => {
+export const Tab: FC<ITabProps> = ({ title, to }) => {
   return (
-    <Button
-      type="button"
-      disabled={isActive}
-      onClick={onClick}
-      className={styles.root}
-      sizeViewVariant="big"
+    <NavLink
+      to={to}
+      className={({ isActive }) =>
+        classNames(styles.root, { [styles.active]: isActive })
+      }
     >
       {title}
-    </Button>
+    </NavLink>
   );
 };

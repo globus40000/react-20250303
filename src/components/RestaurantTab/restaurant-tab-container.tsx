@@ -7,14 +7,10 @@ import { Tab } from "../Tab/tab";
 
 interface IRestaurantTabContainerProps {
   id: Identifier;
-  isActive: boolean;
-  onClick: () => void;
 }
 
 export const RestaurantTabContainer: FC<IRestaurantTabContainerProps> = ({
   id,
-  isActive,
-  onClick,
 }) => {
   const restaurant = useSelector<
     IRootState,
@@ -27,5 +23,5 @@ export const RestaurantTabContainer: FC<IRestaurantTabContainerProps> = ({
 
   const { name } = restaurant;
 
-  return <Tab key={id} title={name} isActive={isActive} onClick={onClick} />;
+  return <Tab key={id} title={name} to={id} />;
 };

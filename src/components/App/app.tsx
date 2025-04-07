@@ -7,6 +7,7 @@ import { store } from "../../redux/store";
 import { RestaurantsPageContainer } from "../../pages/RestaurantsPage/restaurants-page-container";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { HomePage } from "../../pages/HomePage/home-page";
+import { RestaurantPage } from "../../pages/RestaurantPage/restaurant-page";
 
 import "./reset.css";
 import "./app.css";
@@ -23,7 +24,9 @@ export const App: FC = () => {
                 <Route
                   path="/restaurants"
                   element={<RestaurantsPageContainer />}
-                />
+                >
+                  <Route path=":restaurantId" element={<RestaurantPage />} />
+                </Route>
               </Route>
             </Routes>
           </BrowserRouter>
