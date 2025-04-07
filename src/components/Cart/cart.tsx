@@ -1,6 +1,6 @@
 import { FC } from "react";
 import classNames from "classnames";
-import { DishContainer } from "../Dish/dish-container";
+import { CartItemContainer } from "../CartItem/cart-item-container";
 import { Identifier } from "../../types";
 
 import styles from "./cart.module.css";
@@ -18,7 +18,7 @@ export const Cart: FC<ICartProps> = ({ dishesIds, className }) => {
         <ul role="list">
           {dishesIds.map((id) => (
             <li key={id}>
-              <DishContainer id={id} />
+              <CartItemContainer id={id} />
             </li>
           ))}
         </ul>

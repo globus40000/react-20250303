@@ -1,15 +1,15 @@
 import { FC } from "react";
 import { Identifier } from "../../types";
-import { Dish } from "./dish";
+import { CartItem } from "./cart-item";
 import { useSelector } from "react-redux";
 import { selectDishById } from "../../redux/entities/dish/slice";
 import { IRootState } from "../../redux/store";
 
-interface IDishContainerProps {
+interface ICartItemContainerProps {
   id: Identifier;
 }
 
-export const DishContainer: FC<IDishContainerProps> = ({ id }) => {
+export const CartItemContainer: FC<ICartItemContainerProps> = ({ id }) => {
   const dish = useSelector<IRootState, ReturnType<typeof selectDishById>>(
     (state) => selectDishById(state, id)
   );
@@ -18,5 +18,5 @@ export const DishContainer: FC<IDishContainerProps> = ({ id }) => {
     return null;
   }
 
-  return <Dish dish={dish} />;
+  return <CartItem dish={dish} />;
 };
