@@ -1,8 +1,23 @@
 .root {
   display: inline-block;
+  padding: 8px 12px 7px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom: 1px solid rgba(205, 205, 205, 0.4);
 }
 
 .active {
-  color: black;
   pointer-events: none;
+}
+
+.active.light {
+  color: black;
+  background-color: aquamarine;
+  border-color: darkcyan;
+}
+
+.active.dark {
+  color: whitesmoke;
+  background-color: darkcyan;
+  border-color: darkgreen;
 }
