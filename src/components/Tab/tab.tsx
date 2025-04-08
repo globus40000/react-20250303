@@ -1,24 +1,30 @@
-import { FC } from "react";
-import { Button } from "../Button/button";
+import { FC, use } from "react";
+import { NavLink } from "react-router";
+import classNames from "classnames";
+import { ThemeContext } from "../ThemeContextProvider/theme-context";
 
 import styles from "./tab.module.css";
 
 interface ITabProps {
   title: string;
-  onClick: () => void;
-  isActive: boolean;
+  to: string;
 }
 
-export const Tab: FC<ITabProps> = ({ title, onClick, isActive }) => {
+export const Tab: FC<ITabProps> = ({ title, to }) => {
+  const { theme } = use(ThemeContext);
+
   return (
-    <Button
-      type="button"
-      disabled={isActive}
-      onClick={onClick}
-      className={styles.root}
-      sizeViewVariant="big"
+    <NavLink
+      to={to}
+      className={({ isActive }) =>
+        classNames(styles.root, {
+          [styles.active]: isActive,
+          [styles.light]: theme === "light",
+          [styles.dark]: theme === "dark",
+        })
+      }
     >
       {title}
-    </Button>
+    </NavLink>
   );
 };

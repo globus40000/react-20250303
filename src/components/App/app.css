@@ -7,3 +7,12 @@ body {
   font-family: Montserrat, -apple-system, ui-sans-serif, system-ui, sans-serif,
     Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
+
+a {
+  text-decoration: none;
+  color: darkcyan;
+}
+
+a:hover {
+  color: rgba(0, 139, 139, 0.7);
+}

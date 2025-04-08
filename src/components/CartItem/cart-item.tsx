@@ -3,11 +3,11 @@ import { IDishNormalized } from "../../types";
 import { DishCounter } from "../DishCounter/dish-counter";
 import { AuthContext } from "../AuthContextProvider/auth-context";
 
-interface IDishProps {
+interface ICartItemProps {
   dish: IDishNormalized;
 }
 
-export const Dish: FC<IDishProps> = ({ dish }) => {
+export const CartItem: FC<ICartItemProps> = ({ dish }) => {
   const { isAuthorized } = use(AuthContext);
   const { id, name } = dish;
 

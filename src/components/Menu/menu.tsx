@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Identifier } from "../../types";
 import classNames from "classnames";
-import { DishContainer } from "../Dish/dish-container";
+import { DishLinkContainer } from "../DishLink/dish-link-container";
 
 import styles from "./menu.module.css";
 
@@ -17,7 +17,7 @@ export const Menu: FC<IMenuProps> = ({ dishesIds, className }) => {
       <ul role="list">
         {dishesIds.map((id) => (
           <li key={id}>
-            <DishContainer id={id} />
+            <DishLinkContainer id={id} />
           </li>
         ))}
       </ul>

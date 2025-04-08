@@ -19,5 +19,5 @@ export const RestaurantContainer: FC<IRestaurantContainerProps> = ({ id }) => {
     return null;
   }
 
-  return <Restaurant restaurant={restaurant}></Restaurant>;
+  return <Restaurant restaurant={restaurant} />;
 };

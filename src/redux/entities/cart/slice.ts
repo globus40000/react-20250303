@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Identifier } from "../../../types";
+import { IRootState } from "../../store";
 
 type ICartState = Record<Identifier, number>;
 
@@ -30,16 +31,21 @@ export const cartSlice = createSlice({
     },
   },
   selectors: {
-    selectCartDishesIds: (state) => {
-      return Object.keys(state);
-    },
     selectAmountByDishId: (state, id: Identifier): number | undefined => {
       return state[id];
     },
   },
 });
 
-export const { selectCartDishesIds, selectAmountByDishId } =
-  cartSlice.selectors;
+const selectCartSlice = (state: IRootState) => state[cartSlice.name];
+
+export const selectCartDishesIds = createSelector(
+  [selectCartSlice],
+  (state) => {
+    return Object.keys(state);
+  }
+);
+
+export const { selectAmountByDishId } = cartSlice.selectors;
 
 export const { addToCart, removeFromCart } = cartSlice.actions;
