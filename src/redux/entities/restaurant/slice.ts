@@ -7,12 +7,23 @@ const entityAdapter = createEntityAdapter<IRestaurantNormalized>();
 
 export const restaurantsSlice = createSlice({
   name: "restaurantsSlice",
-  initialState: entityAdapter.getInitialState(),
+  initialState: entityAdapter.getInitialState({
+    errorMessage: "",
+  }),
   reducers: {},
   extraReducers: (builder) =>
-    builder.addCase(getRestaurants.fulfilled, (state, { payload }) => {
-      entityAdapter.setAll(state, payload);
-    }),
+    builder
+      .addCase(getRestaurants.fulfilled, (state, { payload }) => {
+        entityAdapter.setAll(state, payload);
+      })
+      .addCase(getRestaurants.rejected, (state, { payload }) => {
+        state.errorMessage = payload ?? "Error";
+      }),
+  selectors: {
+    selectErrorMessage: (state) => {
+      return state.errorMessage;
+    },
+  },
 });
 
 const selectRestaurantsSlice = (state: IRootState) => {
@@ -24,3 +35,5 @@ export const {
   selectById: selectRestaurantById,
   selectTotal: selectRestaurantsTotal,
 } = entityAdapter.getSelectors(selectRestaurantsSlice);
+
+export const { selectErrorMessage } = restaurantsSlice.selectors;

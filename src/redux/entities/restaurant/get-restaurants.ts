@@ -7,7 +7,10 @@ import { IRootState } from "../../store";
 export const getRestaurants = createAsyncThunk<
   IRestaurantNormalized[],
   undefined,
-  { state: IRootState }
+  {
+    state: IRootState;
+    rejectValue: string;
+  }
 >(
   "restaurantsSlice/getRestaurants",
   async (_, { rejectWithValue }) => {
