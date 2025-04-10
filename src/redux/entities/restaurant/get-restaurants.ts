@@ -15,8 +15,7 @@ export const getRestaurants = createAsyncThunk<
     const result = (await response.json()) as IRestaurantNormalized[];
 
     if (!result.length) {
-      rejectWithValue("No data");
-      return [];
+      return rejectWithValue("No data");
     }
 
     return result;
