@@ -50,3 +50,10 @@ export interface IUserNormalized {
   id: Identifier;
   name: string;
 }
+
+export enum RequestStatus {
+  idle = "idle",
+  pending = "pending",
+  rejected = "rejected",
+  fulfilled = "fulfilled",
+}
