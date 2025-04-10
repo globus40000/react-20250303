@@ -1,36 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { normalizedRestaurants } from "../../../mocks/normalized/restaurants";
-import { Identifier, IRestaurantNormalized } from "../../../types";
-import { getEntities, getIds } from "../../utils";
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { IRestaurantNormalized } from "../../../types";
+import { IRootState } from "../../store";
 
-type RestaurantsEntities = Record<Identifier, IRestaurantNormalized>;
-
-interface IRestaurantsState {
-  entities: RestaurantsEntities;
-  ids: Identifier[];
-}
-
-const initialState: IRestaurantsState = {
-  entities: getEntities(normalizedRestaurants),
-  ids: getIds(normalizedRestaurants),
-};
+const entityAdapter = createEntityAdapter<IRestaurantNormalized>();
 
 export const restaurantsSlice = createSlice({
   name: "restaurantsSlice",
-  initialState,
+  initialState: entityAdapter.getInitialState(),
   reducers: {},
-  selectors: {
-    selectRestaurantById: (
-      state,
-      id: Identifier
-    ): IRestaurantNormalized | undefined => {
-      return state.entities[id];
-    },
-    selectRestaurantsIds: (state) => {
-      return state.ids;
-    },
-  },
 });
 
-export const { selectRestaurantById, selectRestaurantsIds } =
-  restaurantsSlice.selectors;
+const selectRestaurantsSlice = (state: IRootState) => {
+  return state[restaurantsSlice.name];
+};
+
+export const {
+  selectIds: selectRestaurantsIds,
+  selectById: selectRestaurantById,
+} = entityAdapter.getSelectors(selectRestaurantsSlice);
