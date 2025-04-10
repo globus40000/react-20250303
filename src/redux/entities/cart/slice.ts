@@ -15,7 +15,7 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, { payload }: PayloadAction<Identifier>) => {
-      state[payload] = Math.min((state[payload] || AMOUNT_MIN) + 1, AMOUNT_MAX);
+      state[payload] = Math.min((state[payload] ?? AMOUNT_MIN) + 1, AMOUNT_MAX);
     },
     removeFromCart: (state, { payload }: PayloadAction<Identifier>) => {
       if (!state[payload]) {
