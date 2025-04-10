@@ -27,7 +27,10 @@ export const FormField: FC<PropsWithChildren<IFormFieldProps>> = ({
     <div className={className}>
       <label
         htmlFor={name}
-        className={classNames({ [styles.required]: required })}
+        className={classNames({
+          // @ts-expect-error: Key must not be undefined.
+          [styles.required]: required,
+        })}
       >
         {label}:
       </label>

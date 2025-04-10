@@ -39,6 +39,7 @@ export const Skeleton: FC<ISkeletonProps> = ({
   return (
     <div
       className={classNames(styles.root, className, {
+        // @ts-expect-error: Key must not be undefined.
         [styles.circular]: variant === "circular",
       })}
       style={style}

@@ -18,8 +18,11 @@ export const Tab: FC<ITabProps> = ({ title, to }) => {
       to={to}
       className={({ isActive }) =>
         classNames(styles.root, {
+          // @ts-expect-error: Key must not be undefined.
           [styles.active]: isActive,
+          // @ts-expect-error: Key must not be undefined.
           [styles.light]: theme === "light",
+          // @ts-expect-error: Key must not be undefined.
           [styles.dark]: theme === "dark",
         })
       }
