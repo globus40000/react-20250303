@@ -9,11 +9,13 @@ import styles from "./restaurants-page.module.css";
 interface IRestaurantsPageProps {
   restaurantsIds: Identifier[];
   requestStatus: RequestStatus;
+  errorMessage: string;
 }
 
 export const RestaurantsPage: FC<IRestaurantsPageProps> = ({
   restaurantsIds,
   requestStatus,
+  errorMessage,
 }) => {
   return (
     <div className={styles.root}>
@@ -21,6 +23,8 @@ export const RestaurantsPage: FC<IRestaurantsPageProps> = ({
       <div className={styles.tabs}>
         {requestStatus === RequestStatus.pending ? (
           <Skeleton variant="rectangular" width={400} height={35} />
+        ) : requestStatus === RequestStatus.rejected ? (
+          <div>{errorMessage}</div>
         ) : (
           restaurantsIds.map((id) => (
             <RestaurantTabContainer key={id} id={id} />
