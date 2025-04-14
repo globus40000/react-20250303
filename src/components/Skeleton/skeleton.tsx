@@ -33,6 +33,7 @@ export const Skeleton: FC<ISkeletonProps> = ({
   }
 
   if (variant === "text") {
+    style.width = width;
     style.height = fontSize ?? "1rem";
   }
 
