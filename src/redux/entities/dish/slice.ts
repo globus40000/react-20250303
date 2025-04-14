@@ -1,32 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { normalizedDishes } from "../../../mocks/normalized/dishes";
-import { Identifier, IDishNormalized } from "../../../types";
-import { getEntities, getIds } from "../../utils";
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { IDishNormalized } from "../../../types";
+import { IRootState } from "../../store";
 
-type DishesEntities = Record<Identifier, IDishNormalized>;
-
-interface IDishesState {
-  entities: DishesEntities;
-  ids: Identifier[];
-}
-
-const initialState: IDishesState = {
-  entities: getEntities(normalizedDishes),
-  ids: getIds(normalizedDishes),
-};
+const entityAdapter = createEntityAdapter<IDishNormalized>();
 
 export const dishesSlice = createSlice({
   name: "dishesSlice",
-  initialState,
+  initialState: entityAdapter.getInitialState(),
   reducers: {},
-  selectors: {
-    selectDishById: (state, id: Identifier): IDishNormalized | undefined => {
-      return state.entities[id];
-    },
-    selectDishesIds: (state) => {
-      return state.ids;
-    },
-  },
 });
 
-export const { selectDishById, selectDishesIds } = dishesSlice.selectors;
+const selectDishesSlice = (state: IRootState) => {
+  return state[dishesSlice.name];
+};
+
+export const {
+  selectIds: selectDishesIds,
+  selectById: selectDishById,
+  selectTotal: selectDishesTotal,
+} = entityAdapter.getSelectors(selectDishesSlice);
