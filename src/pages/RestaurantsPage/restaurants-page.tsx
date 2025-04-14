@@ -3,6 +3,7 @@ import { RestaurantTabContainer } from "../../components/RestaurantTab/restauran
 import { Identifier, RequestStatus } from "../../types";
 import { Outlet } from "react-router";
 import { Skeleton } from "../../components/Skeleton/skeleton";
+import { Notification } from "../../components/Notification/notification";
 
 import styles from "./restaurants-page.module.css";
 
@@ -24,7 +25,7 @@ export const RestaurantsPage: FC<IRestaurantsPageProps> = ({
         {requestStatus === RequestStatus.pending ? (
           <Skeleton variant="rectangular" width={400} height={35} />
         ) : requestStatus === RequestStatus.rejected ? (
-          <div>{errorMessage}</div>
+          <Notification message={errorMessage} />
         ) : (
           restaurantsIds.map((id) => (
             <RestaurantTabContainer key={id} id={id} />
