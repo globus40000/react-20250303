@@ -2,6 +2,7 @@ import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { IDishNormalized } from "../../../types";
 import { IRootState } from "../../store";
 import { getDishesForRestaurant } from "./get-dishes-for-restaurant";
+import { getDishById } from "./get-dish-by-id";
 
 const entityAdapter = createEntityAdapter<IDishNormalized>();
 
@@ -17,6 +18,12 @@ export const dishesSlice = createSlice({
         entityAdapter.setAll(state, payload);
       })
       .addCase(getDishesForRestaurant.rejected, (state, { payload }) => {
+        state.errorMessage = payload ?? "Error";
+      })
+      .addCase(getDishById.fulfilled, (state, { payload }) => {
+        entityAdapter.setOne(state, payload);
+      })
+      .addCase(getDishById.rejected, (state, { payload }) => {
         state.errorMessage = payload ?? "Error";
       }),
   selectors: {
