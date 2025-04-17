@@ -24,7 +24,7 @@ export const Menu: FC<IMenuProps> = ({
     <div className={classNames(styles.root, className)}>
       <h3>Menu</h3>
       {requestStatus === RequestStatus.pending ? (
-        <Skeleton variant="rectangular" width={200} height={62} />
+        <Skeleton variant="rectangular" width={200} height={50} />
       ) : requestStatus === RequestStatus.rejected ? (
         <Notification message={errorMessage} />
       ) : (
