@@ -1,6 +1,7 @@
 import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { IReviewNormalized } from "../../../types";
 import { IRootState } from "../../store";
+import { getReviewsForRestaurant } from "./get-reviews-for-restaurant";
 
 const entityAdapter = createEntityAdapter<IReviewNormalized>();
 
@@ -10,6 +11,14 @@ export const reviewsSlice = createSlice({
     errorMessage: "",
   }),
   reducers: {},
+  extraReducers: (builder) =>
+    builder
+      .addCase(getReviewsForRestaurant.fulfilled, (state, { payload }) => {
+        entityAdapter.setAll(state, payload);
+      })
+      .addCase(getReviewsForRestaurant.rejected, (state, { payload }) => {
+        state.errorMessage = payload ?? "Error";
+      }),
   selectors: {
     selectErrorMessage: (state) => {
       return state.errorMessage;
