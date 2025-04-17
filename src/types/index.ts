@@ -42,6 +42,8 @@ export interface IReviewNormalized {
 export interface IRestaurantNormalized {
   id: Identifier;
   name: string;
+  description: string;
+  img: string;
   menu: Identifier[];
   reviews: Identifier[];
 }
