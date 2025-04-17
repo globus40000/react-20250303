@@ -1,35 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { Identifier, IReviewNormalized } from "../../../types";
-import { getEntities, getIds } from "../../utils";
-import { normalizedReviews } from "../../../mocks/normalized/reviews";
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { IReviewNormalized } from "../../../types";
+import { IRootState } from "../../store";
 
-type ReviewsEntities = Record<Identifier, IReviewNormalized>;
-
-interface IReviewsState {
-  entities: ReviewsEntities;
-  ids: Identifier[];
-}
-
-const initialState: IReviewsState = {
-  entities: getEntities(normalizedReviews),
-  ids: getIds(normalizedReviews),
-};
+const entityAdapter = createEntityAdapter<IReviewNormalized>();
 
 export const reviewsSlice = createSlice({
   name: "reviewsSlice",
-  initialState,
+  initialState: entityAdapter.getInitialState(),
   reducers: {},
-  selectors: {
-    selectReviewById: (
-      state,
-      id: Identifier
-    ): IReviewNormalized | undefined => {
-      return state.entities[id];
-    },
-    selectReviewsIds: (state) => {
-      return state.ids;
-    },
-  },
 });
 
-export const { selectReviewById, selectReviewsIds } = reviewsSlice.selectors;
+const selectReviewsSlice = (state: IRootState) => {
+  return state[reviewsSlice.name];
+};
+
+export const { selectIds: selectReviewsIds, selectById: selectReviewById } =
+  entityAdapter.getSelectors(selectReviewsSlice);
