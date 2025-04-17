@@ -8,18 +8,11 @@ export const getReviewsForRestaurant = createAsyncThunk<
   {
     rejectValue: string;
   }
->(
-  "reviewsSlice/getReviewsForRestaurant",
-  async (restaurantId, { rejectWithValue }) => {
-    const response = await fetch(
-      `${API_BASE_URL}/reviews?restaurantId=${restaurantId}`
-    );
-    const result = (await response.json()) as IReviewNormalized[];
+>("reviewsSlice/getReviewsForRestaurant", async (restaurantId) => {
+  const response = await fetch(
+    `${API_BASE_URL}/reviews?restaurantId=${restaurantId}`
+  );
+  const result = (await response.json()) as IReviewNormalized[];
 
-    if (!result.length) {
-      return rejectWithValue("No data");
-    }
-
-    return result;
-  }
-);
+  return result;
+});
