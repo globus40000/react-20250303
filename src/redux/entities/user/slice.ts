@@ -6,8 +6,15 @@ const entityAdapter = createEntityAdapter<IUserNormalized>();
 
 export const usersSlice = createSlice({
   name: "usersSlice",
-  initialState: entityAdapter.getInitialState(),
+  initialState: entityAdapter.getInitialState({
+    errorMessage: "",
+  }),
   reducers: {},
+  selectors: {
+    selectErrorMessage: (state) => {
+      return state.errorMessage;
+    },
+  },
 });
 
 const selectUsersSlice = (state: IRootState) => {
@@ -19,3 +26,5 @@ export const {
   selectById: selectUserById,
   selectTotal: selectUsersTotal,
 } = entityAdapter.getSelectors(selectUsersSlice);
+
+export const { selectErrorMessage } = usersSlice.selectors;
