@@ -1,25 +1,30 @@
 import { FC } from "react";
 import { Reviews } from "./reviews";
 import { Identifier } from "../../types";
+import { useRequest } from "../../redux/hooks/use-request";
+import { getReviewsForRestaurant } from "../../redux/entities/review/get-reviews-for-restaurant";
 import { useSelector } from "react-redux";
-import { IRootState } from "../../redux/store";
-import { selectRestaurantById } from "../../redux/entities/restaurant/slice";
+import {
+  selectErrorMessage,
+  selectReviewsIds,
+} from "../../redux/entities/review/slice";
 
 interface IReviewsContainerProps {
   id: Identifier;
 }
 
 export const ReviewsContainer: FC<IReviewsContainerProps> = ({ id }) => {
-  const restaurant = useSelector<
-    IRootState,
-    ReturnType<typeof selectRestaurantById>
-  >((state) => selectRestaurantById(state, id));
+  // @ts-expect-error: Type 'unknown' is not assignable to type 'string'.
+  const requestStatus = useRequest(getReviewsForRestaurant, id);
+  const reviewsIds = useSelector(selectReviewsIds);
+  const errorMessage = useSelector(selectErrorMessage);
 
-  if (!restaurant) {
-    return null;
-  }
-
-  const { reviews } = restaurant;
-
-  return <Reviews reviewsIds={reviews} textNoReviews="No reviews yet." />;
+  return (
+    <Reviews
+      reviewsIds={reviewsIds}
+      textNoReviews="No reviews yet."
+      requestStatus={requestStatus}
+      errorMessage={errorMessage}
+    />
+  );
 };
