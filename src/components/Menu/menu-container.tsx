@@ -5,8 +5,8 @@ import { Menu } from "./menu";
 import { useRequest } from "../../redux/hooks/use-request";
 import { getDishesForRestaurant } from "../../redux/entities/dish/get-dishes-for-restaurant";
 import {
-  selectDishesIds,
   selectErrorMessage,
+  selectMenu,
 } from "../../redux/entities/dish/slice";
 
 interface IMenuContainerProps {
@@ -16,7 +16,7 @@ interface IMenuContainerProps {
 export const MenuContainer: FC<IMenuContainerProps> = ({ id }) => {
   // @ts-expect-error: Type 'unknown' is not assignable to type 'string'.
   const requestStatus = useRequest(getDishesForRestaurant, id);
-  const dishesIds = useSelector(selectDishesIds);
+  const dishesIds = useSelector(selectMenu);
   const errorMessage = useSelector(selectErrorMessage);
 
   return (
