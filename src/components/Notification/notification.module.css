@@ -1,0 +1,18 @@
+.root {
+  position: fixed;
+  background-color: #ccc;
+  top: 8px;
+  width: 30vw;
+  padding: 20px;
+  border-radius: 8px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.close {
+  position: absolute;
+  top: 3px;
+  right: 6px;
+  color: gray;
+  cursor: pointer;
+}

@@ -28,9 +28,13 @@ export const Button: FC<PropsWithChildren<IButtonProps>> = ({
       disabled={disabled}
       onClick={onClick}
       className={classNames(styles.root, className, {
+        // @ts-expect-error: Key must not be undefined.
         [styles.default]: sizeViewVariant === "default",
+        // @ts-expect-error: Key must not be undefined.
         [styles.big]: sizeViewVariant === "big",
+        // @ts-expect-error: Key must not be undefined.
         [styles.light]: theme === "light",
+        // @ts-expect-error: Key must not be undefined.
         [styles.dark]: theme === "dark",
       })}
     >

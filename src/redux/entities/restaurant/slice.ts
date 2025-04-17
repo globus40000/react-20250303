@@ -1,36 +1,46 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { normalizedRestaurants } from "../../../mocks/normalized/restaurants";
-import { Identifier, IRestaurantNormalized } from "../../../types";
-import { getEntities, getIds } from "../../utils";
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { IRestaurantNormalized } from "../../../types";
+import { getRestaurants } from "./get-restaurants";
+import { IRootState } from "../../store";
+import { getRestaurantById } from "./get-restaurant-by-id";
 
-type RestaurantsEntities = Record<Identifier, IRestaurantNormalized>;
-
-interface IRestaurantsState {
-  entities: RestaurantsEntities;
-  ids: Identifier[];
-}
-
-const initialState: IRestaurantsState = {
-  entities: getEntities(normalizedRestaurants),
-  ids: getIds(normalizedRestaurants),
-};
+const entityAdapter = createEntityAdapter<IRestaurantNormalized>();
 
 export const restaurantsSlice = createSlice({
   name: "restaurantsSlice",
-  initialState,
+  initialState: entityAdapter.getInitialState({
+    errorMessage: "",
+  }),
   reducers: {},
+  extraReducers: (builder) =>
+    builder
+      .addCase(getRestaurants.fulfilled, (state, { payload }) => {
+        entityAdapter.setAll(state, payload);
+      })
+      .addCase(getRestaurants.rejected, (state, { payload }) => {
+        state.errorMessage = payload ?? "Error";
+      })
+      .addCase(getRestaurantById.fulfilled, (state, { payload }) => {
+        entityAdapter.setOne(state, payload);
+      })
+      .addCase(getRestaurantById.rejected, (state, { payload }) => {
+        state.errorMessage = payload ?? "Error";
+      }),
   selectors: {
-    selectRestaurantById: (
-      state,
-      id: Identifier
-    ): IRestaurantNormalized | undefined => {
-      return state.entities[id];
-    },
-    selectRestaurantsIds: (state) => {
-      return state.ids;
+    selectErrorMessage: (state) => {
+      return state.errorMessage;
     },
   },
 });
 
-export const { selectRestaurantById, selectRestaurantsIds } =
-  restaurantsSlice.selectors;
+const selectRestaurantsSlice = (state: IRootState) => {
+  return state[restaurantsSlice.name];
+};
+
+export const {
+  selectIds: selectRestaurantsIds,
+  selectById: selectRestaurantById,
+  selectTotal: selectRestaurantsTotal,
+} = entityAdapter.getSelectors(selectRestaurantsSlice);
+
+export const { selectErrorMessage } = restaurantsSlice.selectors;
