@@ -2,8 +2,7 @@ import { FC } from "react";
 import { IRestaurantNormalized, RequestStatus } from "../../types";
 import { Tab } from "../Tab/tab";
 import { Outlet } from "react-router";
-import { Skeleton } from "../Skeleton/skeleton";
-import { Notification } from "../Notification/notification";
+import { RestaurantName } from "../RestaurantName/restaurant-name";
 
 import styles from "./restaurant.module.css";
 
@@ -20,18 +19,12 @@ export const Restaurant: FC<IRestaurantProps> = ({
 }) => {
   return (
     <div className={styles.root}>
-      {requestStatus === RequestStatus.pending ? (
-        <Skeleton
-          variant="text"
-          width={200}
-          fontSize={24}
-          className={styles.skeleton}
-        />
-      ) : requestStatus === RequestStatus.rejected ? (
-        <Notification message={errorMessage} />
-      ) : (
-        <h2>{restaurant?.name}</h2>
-      )}
+      <RestaurantName
+        restaurant={restaurant}
+        requestStatus={requestStatus}
+        errorMessage={errorMessage}
+        className={styles.skeleton}
+      />
       <div className={styles.tabs}>
         <Tab title="Menu" to="menu" />
         <Tab title="Reviews" to="reviews" />

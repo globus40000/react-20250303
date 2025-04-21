@@ -2,11 +2,9 @@ import { FC, use } from "react";
 import { Identifier, RequestStatus } from "../../types";
 import { ReviewForm } from "../ReviewForm/review-form";
 import { AuthContext } from "../AuthContextProvider/auth-context";
+import { ReviewsList } from "../ReviewsList/reviews-list";
 
 import styles from "./reviews.module.css";
-import { ReviewContainer } from "../Review/review-container";
-import { Skeleton } from "../Skeleton/skeleton";
-import { Notification } from "../Notification/notification";
 
 interface IReviewsProps {
   reviewsIds: Identifier[];
@@ -26,21 +24,12 @@ export const Reviews: FC<IReviewsProps> = ({
   return (
     <div className={styles.root}>
       <h3>Reviews</h3>
-      {requestStatus === RequestStatus.pending ? (
-        <Skeleton variant="rectangular" width={200} height={50} />
-      ) : requestStatus === RequestStatus.rejected ? (
-        <Notification message={errorMessage} />
-      ) : reviewsIds.length === 0 && typeof textNoReviews === "string" ? (
-        <div>{textNoReviews}</div>
-      ) : (
-        <ul role="list">
-          {reviewsIds.map((id) => (
-            <li key={id}>
-              <ReviewContainer id={id} />
-            </li>
-          ))}
-        </ul>
-      )}
+      <ReviewsList
+        reviewsIds={reviewsIds}
+        textNoReviews={textNoReviews}
+        requestStatus={requestStatus}
+        errorMessage={errorMessage}
+      />
       {isAuthorized && <ReviewForm className={styles.form} />}
     </div>
   );

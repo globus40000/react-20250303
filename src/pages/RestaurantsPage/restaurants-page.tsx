@@ -1,9 +1,7 @@
 import { FC } from "react";
-import { RestaurantTabContainer } from "../../components/RestaurantTab/restaurant-tab-container";
 import { Identifier, RequestStatus } from "../../types";
 import { Outlet } from "react-router";
-import { Skeleton } from "../../components/Skeleton/skeleton";
-import { Notification } from "../../components/Notification/notification";
+import { RestaurantsTabs } from "../../components/RestaurantsTabs/restaurants-tabs";
 
 import styles from "./restaurants-page.module.css";
 
@@ -22,15 +20,11 @@ export const RestaurantsPage: FC<IRestaurantsPageProps> = ({
     <div className={styles.root}>
       <h1>Restaurants</h1>
       <div className={styles.tabs}>
-        {requestStatus === RequestStatus.pending ? (
-          <Skeleton variant="rectangular" width={400} height={35} />
-        ) : requestStatus === RequestStatus.rejected ? (
-          <Notification message={errorMessage} />
-        ) : (
-          restaurantsIds.map((id) => (
-            <RestaurantTabContainer key={id} id={id} />
-          ))
-        )}
+        <RestaurantsTabs
+          restaurantsIds={restaurantsIds}
+          requestStatus={requestStatus}
+          errorMessage={errorMessage}
+        />
       </div>
       <Outlet />
     </div>
