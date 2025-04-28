@@ -1,5 +1,5 @@
 import { FC, use } from "react";
-import { IDishNormalized, RequestStatus } from "../../types";
+import { IDishNormalized } from "../../types";
 import { AuthContext } from "../AuthContextProvider/auth-context";
 import { DishName } from "../DishName/dish-name";
 import { DishIngredients } from "../DishIngredients/dish-ingredients";
@@ -12,39 +12,35 @@ import styles from "./dish.module.css";
 
 interface IDishProps {
   dish: IDishNormalized | undefined;
-  requestStatus: RequestStatus;
+  isLoading: boolean;
+  isError: boolean;
   errorMessage: string;
 }
 
-export const Dish: FC<IDishProps> = ({ dish, requestStatus, errorMessage }) => {
+export const Dish: FC<IDishProps> = ({
+  dish,
+  isLoading,
+  isError,
+  errorMessage,
+}) => {
   const { isAuthorized } = use(AuthContext);
-  const isPending = requestStatus === RequestStatus.pending;
-  const isRejected = requestStatus === RequestStatus.rejected;
 
   return (
     <div>
-      <DishName
-        dish={dish}
-        requestStatus={requestStatus}
-        className={styles.name}
-      />
+      <DishName dish={dish} isLoading={isLoading} className={styles.name} />
       <DishIngredients
         dish={dish}
-        requestStatus={requestStatus}
+        isLoading={isLoading}
         className={styles.block}
       />
-      <DishPrice
-        dish={dish}
-        requestStatus={requestStatus}
-        className={styles.block}
-      />
+      <DishPrice dish={dish} isLoading={isLoading} className={styles.block} />
       {isAuthorized &&
-        (isPending ? (
+        (isLoading ? (
           <Skeleton variant="rectangular" width={100} height={31} />
         ) : (
-          !isRejected && dish && <DishCounter id={dish.id} />
+          !isError && dish && <DishCounter dish={dish} />
         ))}
-      {isRejected && <Notification message={errorMessage} />}
+      {isError && <Notification message={errorMessage} />}
     </div>
   );
 };

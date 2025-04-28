@@ -5,22 +5,25 @@ import {
   removeFromCart,
   selectAmountByDishId,
 } from "../../redux/entities/cart/slice";
-import { Identifier } from "../../types";
+import { IDishNormalized } from "../../types";
 import { IRootState } from "../../redux/store";
 
-export const useAmount = (id: Identifier) => {
+export const useAmount = (dish: IDishNormalized) => {
   const dispatch = useDispatch();
 
   const amount =
     useSelector<IRootState, ReturnType<typeof selectAmountByDishId>>((state) =>
-      selectAmountByDishId(state, id)
+      selectAmountByDishId(state, dish.id)
     ) ?? 0;
 
-  const increment = useCallback(() => dispatch(addToCart(id)), [dispatch, id]);
+  const increment = useCallback(
+    () => dispatch(addToCart(dish)),
+    [dispatch, dish]
+  );
 
   const decrement = useCallback(
-    () => dispatch(removeFromCart(id)),
-    [dispatch, id]
+    () => dispatch(removeFromCart(dish.id)),
+    [dispatch, dish.id]
   );
 
   return { amount, increment, decrement };

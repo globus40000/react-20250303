@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { IDishNormalized, RequestStatus } from "../../types";
+import { IDishNormalized } from "../../types";
 import { Skeleton } from "../Skeleton/skeleton";
 import classNames from "classnames";
 
@@ -7,19 +7,19 @@ import styles from "./dish-ingredients.module.css";
 
 interface IDishIngredientsProps {
   dish: IDishNormalized | undefined;
-  requestStatus: RequestStatus;
+  isLoading: boolean;
   className?: string;
 }
 
 export const DishIngredients: FC<IDishIngredientsProps> = ({
   dish,
-  requestStatus,
+  isLoading,
   className,
 }) => {
   return (
     <div className={classNames(styles.root, className)}>
       <h3>Ingredients</h3>
-      {requestStatus === RequestStatus.pending ? (
+      {isLoading ? (
         <Skeleton variant="rectangular" width={200} height={50} />
       ) : (
         <ul role="list">

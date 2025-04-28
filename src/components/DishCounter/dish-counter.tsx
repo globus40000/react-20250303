@@ -1,15 +1,15 @@
 import { FC } from "react";
 import { Counter } from "../Counter/counter";
 import { useAmount } from "./use-amount";
-import { Identifier } from "../../types";
+import { IDishNormalized } from "../../types";
 import { AMOUNT_MAX, AMOUNT_MIN } from "../../redux/entities/cart/slice";
 
 interface IDishCounterProps {
-  id: Identifier;
+  dish: IDishNormalized;
 }
 
-export const DishCounter: FC<IDishCounterProps> = ({ id }) => {
-  const { amount, increment, decrement } = useAmount(id);
+export const DishCounter: FC<IDishCounterProps> = ({ dish }) => {
+  const { amount, increment, decrement } = useAmount(dish);
 
   return (
     <Counter

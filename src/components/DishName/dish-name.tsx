@@ -1,23 +1,23 @@
 import { FC } from "react";
 import { Skeleton } from "../Skeleton/skeleton";
-import { IDishNormalized, RequestStatus } from "../../types";
+import { IDishNormalized } from "../../types";
 
 import styles from "./dish-name.module.css";
 
 interface IDishNameProps {
   dish: IDishNormalized | undefined;
-  requestStatus: RequestStatus;
+  isLoading: boolean;
   className?: string;
 }
 
 export const DishName: FC<IDishNameProps> = ({
   dish,
-  requestStatus,
+  isLoading,
   className,
 }) => {
   return (
     <div className={className}>
-      {requestStatus === RequestStatus.pending ? (
+      {isLoading ? (
         <div className={styles.skeleton}>
           <Skeleton variant="text" width={200} fontSize={24} />
         </div>
