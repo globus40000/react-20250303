@@ -1,5 +1,6 @@
-import { IUser } from "../types";
+import { IUserNormalized } from "../types";
 
-export const user: IUser = {
+export const user: IUserNormalized = {
+  id: "abc",
   name: "John",
 };
