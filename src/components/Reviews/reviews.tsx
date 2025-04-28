@@ -15,6 +15,8 @@ interface IReviewsProps {
   errorMessage: string;
   onAddReview: (review: IAddReviewBody) => void;
   isAddReviewLoading: boolean;
+  isAddReviewError: boolean;
+  errorMessageAddReview: string;
 }
 
 export const Reviews: FC<IReviewsProps> = ({
@@ -25,6 +27,8 @@ export const Reviews: FC<IReviewsProps> = ({
   errorMessage,
   onAddReview,
   isAddReviewLoading,
+  isAddReviewError,
+  errorMessageAddReview,
 }) => {
   const { isAuthorized } = use(AuthContext);
 
@@ -42,6 +46,8 @@ export const Reviews: FC<IReviewsProps> = ({
         <ReviewForm
           onSubmit={onAddReview}
           isAddReviewLoading={isAddReviewLoading}
+          isAddReviewError={isAddReviewError}
+          errorMessageAddReview={errorMessageAddReview}
           className={styles.form}
         />
       )}

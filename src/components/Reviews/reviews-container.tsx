@@ -31,7 +31,17 @@ export const ReviewsContainer: FC<IReviewsContainerProps> = ({ id }) => {
   const reviewsErrorMessage = getErrorMessage(reviewsError);
   const usersErrorMessage = getErrorMessage(usersError);
 
-  const [addReview, { isLoading: isAddReviewLoading }] = useAddReviewMutation();
+  const [
+    addReview,
+    {
+      isLoading: isAddReviewLoading,
+      isError: isAddReviewError,
+      error: errorAddReview,
+    },
+  ] = useAddReviewMutation();
+
+  const errorMessageAddReview = getErrorMessage(errorAddReview);
+
   const handleAddReview = (review: IAddReviewBody) => {
     void addReview({ restaurantId: id, review });
   };
@@ -45,6 +55,8 @@ export const ReviewsContainer: FC<IReviewsContainerProps> = ({ id }) => {
       errorMessage={reviewsErrorMessage || usersErrorMessage}
       onAddReview={handleAddReview}
       isAddReviewLoading={isAddReviewLoading}
+      isAddReviewError={isAddReviewError}
+      errorMessageAddReview={errorMessageAddReview}
     />
   );
 };

@@ -5,12 +5,15 @@ import { Button } from "../Button/button";
 import { FormField } from "../FormField/form-field";
 import { IAddReviewBody } from "../../redux/services/api";
 import { AuthContext } from "../AuthContextProvider/auth-context";
+import { Notification } from "../Notification/notification";
 
 import styles from "./review-form.module.css";
 
 interface IReviewFormProps {
   onSubmit: (review: IAddReviewBody) => void;
   isAddReviewLoading: boolean;
+  isAddReviewError: boolean;
+  errorMessageAddReview: string;
   className?: string;
 }
 
@@ -19,6 +22,8 @@ const IS_TEXT_REQUIRED = true;
 export const ReviewForm: FC<IReviewFormProps> = ({
   onSubmit,
   isAddReviewLoading,
+  isAddReviewError,
+  errorMessageAddReview,
   className,
 }) => {
   const { text, rating, setText, incrementRating, decrementRating, resetForm } =
@@ -71,6 +76,7 @@ export const ReviewForm: FC<IReviewFormProps> = ({
           Clear
         </Button>
       </div>
+      {isAddReviewError && <Notification message={errorMessageAddReview} />}
     </form>
   );
 };
