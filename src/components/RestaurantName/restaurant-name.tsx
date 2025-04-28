@@ -1,22 +1,24 @@
 import { FC } from "react";
-import { IRestaurantNormalized, RequestStatus } from "../../types";
+import { IRestaurantNormalized } from "../../types";
 import { Skeleton } from "../Skeleton/skeleton";
 import { Notification } from "../Notification/notification";
 
 interface IRestaurantNameProps {
   restaurant: IRestaurantNormalized | undefined;
-  requestStatus: RequestStatus;
+  isLoading: boolean;
+  isError: boolean;
   errorMessage: string;
   className?: string;
 }
 
 export const RestaurantName: FC<IRestaurantNameProps> = ({
   restaurant,
-  requestStatus,
+  isLoading,
+  isError,
   errorMessage,
   className,
 }) => {
-  if (requestStatus === RequestStatus.pending) {
+  if (isLoading) {
     return (
       <Skeleton
         variant="text"
@@ -27,7 +29,7 @@ export const RestaurantName: FC<IRestaurantNameProps> = ({
     );
   }
 
-  if (requestStatus === RequestStatus.rejected) {
+  if (isError) {
     return <Notification message={errorMessage} />;
   }
 

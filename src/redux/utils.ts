@@ -1,4 +1,6 @@
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { RequestStatus } from "../types";
+import { SerializedError } from "@reduxjs/toolkit";
 
 export function getCommonRequestStatus(arr: RequestStatus[]) {
   const stat = arr.reduce(
@@ -28,4 +30,22 @@ export function getCommonRequestStatus(arr: RequestStatus[]) {
   }
 
   return RequestStatus.idle;
+}
+
+type RTKQueryError = FetchBaseQueryError | SerializedError | undefined;
+
+export function getErrorMessage(error: RTKQueryError): string {
+  if (!error) {
+    return "";
+  }
+
+  if ("error" in error) {
+    return error.error;
+  }
+
+  if ("message" in error && typeof error.message === "string") {
+    return error.message;
+  }
+
+  return "Error";
 }
