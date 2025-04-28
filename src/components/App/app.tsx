@@ -11,7 +11,7 @@ import { RestaurantPage } from "../../pages/RestaurantPage/restaurant-page";
 import { NotFoundPage } from "../../pages/NotFoundPage/not-found-page";
 import { MenuPage } from "../../pages/MenuPage/menu-page";
 import { ReviewsPage } from "../../pages/ReviewsPage/reviews-page";
-import { DishPageContainer } from "../../pages/DishPage/dish-page-container";
+import { DishPage } from "../../pages/DishPage/dish-page";
 
 import "./reset.css";
 import "./app.css";
@@ -36,7 +36,7 @@ export const App: FC = () => {
                     <Route path="reviews" element={<ReviewsPage />} />
                   </Route>
                 </Route>
-                <Route path="/dish/:dishId" element={<DishPageContainer />} />
+                <Route path="/dish/:dishId" element={<DishPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>
