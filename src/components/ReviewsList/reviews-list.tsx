@@ -2,7 +2,7 @@ import { FC } from "react";
 import { IReviewNormalized } from "../../types";
 import { Notification } from "../Notification/notification";
 import { Skeleton } from "../Skeleton/skeleton";
-import { Review } from "../Review/review";
+import { ReviewContainer } from "../Review/review-container";
 
 interface IReviewsListProps {
   reviews: IReviewNormalized[];
@@ -35,7 +35,7 @@ export const ReviewsList: FC<IReviewsListProps> = ({
     <ul role="list">
       {reviews.map((review) => (
         <li key={review.id}>
-          <Review review={review} />
+          <ReviewContainer review={review} />
         </li>
       ))}
     </ul>

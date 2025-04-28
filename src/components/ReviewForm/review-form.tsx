@@ -3,17 +3,22 @@ import { RATING_MAX, RATING_MIN, useReviewForm } from "./use-review-form";
 import { Counter } from "../Counter/counter";
 import { Button } from "../Button/button";
 import { FormField } from "../FormField/form-field";
-import { IAddReviewBody } from "../../redux/services/api";
+import { IAddReviewBody, IUpdateReviewBody } from "../../redux/services/api";
 import { AuthContext } from "../AuthContextProvider/auth-context";
 import { Notification } from "../Notification/notification";
+import { IReviewNormalized } from "../../types";
 
 import styles from "./review-form.module.css";
 
+type CallbackAddReview = (review: IAddReviewBody) => void;
+type CallbackUpdateReview = (fields: IUpdateReviewBody) => void;
+
 interface IReviewFormProps {
-  onSubmit: (review: IAddReviewBody) => void;
+  onSubmit: CallbackAddReview | CallbackUpdateReview;
   isLoading: boolean;
   isError: boolean;
   errorMessage: string;
+  review?: IReviewNormalized;
   className?: string;
 }
 
@@ -24,21 +29,26 @@ export const ReviewForm: FC<IReviewFormProps> = ({
   isLoading,
   isError,
   errorMessage,
+  review,
   className,
 }) => {
   const { text, rating, setText, incrementRating, decrementRating, resetForm } =
-    useReviewForm();
+    useReviewForm(review);
 
   const { user } = use(AuthContext);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!user) {
-      throw new Error("Can not submit without user");
-    }
+    if (review) {
+      (onSubmit as CallbackUpdateReview)({ text, rating });
+    } else {
+      if (!user) {
+        throw new Error("Can not submit without user");
+      }
 
-    onSubmit({ userId: user.id, text, rating });
+      (onSubmit as CallbackAddReview)({ userId: user.id, text, rating });
+    }
   };
 
   return (
@@ -66,7 +76,7 @@ export const ReviewForm: FC<IReviewFormProps> = ({
       </FormField>
       <div className={styles.controls}>
         <Button type="submit" className={styles.control} disabled={isLoading}>
-          Add review
+          {review ? "Update review" : "Add review"}
         </Button>
         <Button type="reset" className={styles.control}>
           Clear

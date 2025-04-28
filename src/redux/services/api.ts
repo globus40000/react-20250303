@@ -15,6 +15,15 @@ interface IAddReviewArg {
   review: IAddReviewBody;
 }
 
+export type IUpdateReviewBody = Partial<
+  Omit<IReviewNormalized, "id" | "userId">
+>;
+
+interface IUpdateReviewArg {
+  reviewId: Identifier;
+  fields: IUpdateReviewBody;
+}
+
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: API_BASE_URL }),
@@ -38,6 +47,14 @@ export const api = createApi({
       }),
       invalidatesTags: [{ type: "reviews", id: "all" }],
     }),
+    updateReview: builder.mutation<IReviewNormalized, IUpdateReviewArg>({
+      query: ({ reviewId, fields }) => ({
+        url: `/review/${reviewId}`,
+        body: fields,
+        method: "PATCH",
+      }),
+      invalidatesTags: [{ type: "reviews", id: "all" }],
+    }),
     getDishesForRestaurant: builder.query<IDishNormalized[], Identifier>({
       query: (restaurantId) => `/dishes?restaurantId=${restaurantId}`,
     }),
@@ -52,6 +69,7 @@ export const {
   useGetUsersQuery,
   useGetReviewsForRestaurantQuery,
   useAddReviewMutation,
+  useUpdateReviewMutation,
   useGetDishesForRestaurantQuery,
   useGetDishByIdQuery,
 } = api;

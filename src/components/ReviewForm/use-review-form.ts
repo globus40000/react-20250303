@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+import { IReviewNormalized } from "../../types";
 
 interface IReviewFormState {
   text: string;
@@ -61,8 +62,19 @@ const reducer = (
   }
 };
 
-export const useReviewForm = () => {
-  const [form, dispatch] = useReducer(reducer, DEFAULT_FORM_VALUE);
+const getInitialFormValue = (review?: IReviewNormalized): IReviewFormState => {
+  if (!review) {
+    return DEFAULT_FORM_VALUE;
+  }
+
+  return {
+    text: review.text,
+    rating: review.rating,
+  };
+};
+
+export const useReviewForm = (review?: IReviewNormalized) => {
+  const [form, dispatch] = useReducer(reducer, getInitialFormValue(review));
 
   const { text, rating } = form;
 
