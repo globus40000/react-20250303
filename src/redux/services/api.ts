@@ -8,9 +8,17 @@ import {
   IUserNormalized,
 } from "../../types";
 
+export type IAddReviewBody = Omit<IReviewNormalized, "id">;
+
+interface IAddReviewArg {
+  restaurantId: Identifier;
+  review: IAddReviewBody;
+}
+
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: API_BASE_URL }),
+  tagTypes: ["reviews"],
   endpoints: (builder) => ({
     getRestaurants: builder.query<IRestaurantNormalized[], unknown>({
       query: () => "/restaurants",
@@ -20,6 +28,15 @@ export const api = createApi({
     }),
     getReviewsForRestaurant: builder.query<IReviewNormalized[], Identifier>({
       query: (restaurantId) => `/reviews?restaurantId=${restaurantId}`,
+      providesTags: [{ type: "reviews", id: "all" }],
+    }),
+    addReview: builder.mutation<IReviewNormalized, IAddReviewArg>({
+      query: ({ restaurantId, review }) => ({
+        url: `/review/${restaurantId}`,
+        body: review,
+        method: "post",
+      }),
+      invalidatesTags: [{ type: "reviews", id: "all" }],
     }),
     getDishesForRestaurant: builder.query<IDishNormalized[], Identifier>({
       query: (restaurantId) => `/dishes?restaurantId=${restaurantId}`,
@@ -34,6 +51,7 @@ export const {
   useGetRestaurantsQuery,
   useGetUsersQuery,
   useGetReviewsForRestaurantQuery,
+  useAddReviewMutation,
   useGetDishesForRestaurantQuery,
   useGetDishByIdQuery,
 } = api;
