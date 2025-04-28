@@ -45,9 +45,9 @@ export const Reviews: FC<IReviewsProps> = ({
       {isAuthorized && (
         <ReviewForm
           onSubmit={onAddReview}
-          isAddReviewLoading={isAddReviewLoading}
-          isAddReviewError={isAddReviewError}
-          errorMessageAddReview={errorMessageAddReview}
+          isLoading={isAddReviewLoading}
+          isError={isAddReviewError}
+          errorMessage={errorMessageAddReview}
           className={styles.form}
         />
       )}

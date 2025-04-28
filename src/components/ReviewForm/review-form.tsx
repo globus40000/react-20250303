@@ -11,9 +11,9 @@ import styles from "./review-form.module.css";
 
 interface IReviewFormProps {
   onSubmit: (review: IAddReviewBody) => void;
-  isAddReviewLoading: boolean;
-  isAddReviewError: boolean;
-  errorMessageAddReview: string;
+  isLoading: boolean;
+  isError: boolean;
+  errorMessage: string;
   className?: string;
 }
 
@@ -21,9 +21,9 @@ const IS_TEXT_REQUIRED = true;
 
 export const ReviewForm: FC<IReviewFormProps> = ({
   onSubmit,
-  isAddReviewLoading,
-  isAddReviewError,
-  errorMessageAddReview,
+  isLoading,
+  isError,
+  errorMessage,
   className,
 }) => {
   const { text, rating, setText, incrementRating, decrementRating, resetForm } =
@@ -65,18 +65,14 @@ export const ReviewForm: FC<IReviewFormProps> = ({
         />
       </FormField>
       <div className={styles.controls}>
-        <Button
-          type="submit"
-          className={styles.control}
-          disabled={isAddReviewLoading}
-        >
+        <Button type="submit" className={styles.control} disabled={isLoading}>
           Add review
         </Button>
         <Button type="reset" className={styles.control}>
           Clear
         </Button>
       </div>
-      {isAddReviewError && <Notification message={errorMessageAddReview} />}
+      {isError && <Notification message={errorMessage} />}
     </form>
   );
 };
