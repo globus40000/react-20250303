@@ -1,32 +1,39 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { normalizedUsers } from "../../../mocks/normalized/users";
-import { Identifier, IUserNormalized } from "../../../types";
-import { getEntities, getIds } from "../../utils";
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { IUserNormalized } from "../../../types";
+import { IRootState } from "../../store";
+import { getUsers } from "./get-users";
 
-type UsersEntities = Record<Identifier, IUserNormalized>;
-
-interface IUsersState {
-  entities: UsersEntities;
-  ids: Identifier[];
-}
-
-const initialState: IUsersState = {
-  entities: getEntities(normalizedUsers),
-  ids: getIds(normalizedUsers),
-};
+const entityAdapter = createEntityAdapter<IUserNormalized>();
 
 export const usersSlice = createSlice({
   name: "usersSlice",
-  initialState,
+  initialState: entityAdapter.getInitialState({
+    errorMessage: "",
+  }),
   reducers: {},
+  extraReducers: (builder) =>
+    builder
+      .addCase(getUsers.fulfilled, (state, { payload }) => {
+        entityAdapter.setAll(state, payload);
+      })
+      .addCase(getUsers.rejected, (state, { payload }) => {
+        state.errorMessage = payload ?? "Error";
+      }),
   selectors: {
-    selectUserById: (state, id: Identifier): IUserNormalized | undefined => {
-      return state.entities[id];
-    },
-    selectUsersIds: (state) => {
-      return state.ids;
+    selectErrorMessage: (state) => {
+      return state.errorMessage;
     },
   },
 });
 
-export const { selectUserById, selectUsersIds } = usersSlice.selectors;
+const selectUsersSlice = (state: IRootState) => {
+  return state[usersSlice.name];
+};
+
+export const {
+  selectIds: selectUsersIds,
+  selectById: selectUserById,
+  selectTotal: selectUsersTotal,
+} = entityAdapter.getSelectors(selectUsersSlice);
+
+export const { selectErrorMessage } = usersSlice.selectors;

@@ -1,32 +1,51 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { normalizedDishes } from "../../../mocks/normalized/dishes";
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { Identifier, IDishNormalized } from "../../../types";
-import { getEntities, getIds } from "../../utils";
+import { IRootState } from "../../store";
+import { getDishesForRestaurant } from "./get-dishes-for-restaurant";
+import { getDishById } from "./get-dish-by-id";
 
-type DishesEntities = Record<Identifier, IDishNormalized>;
-
-interface IDishesState {
-  entities: DishesEntities;
-  ids: Identifier[];
-}
-
-const initialState: IDishesState = {
-  entities: getEntities(normalizedDishes),
-  ids: getIds(normalizedDishes),
-};
+const entityAdapter = createEntityAdapter<IDishNormalized>();
 
 export const dishesSlice = createSlice({
   name: "dishesSlice",
-  initialState,
+  initialState: entityAdapter.getInitialState<{
+    menu: Identifier[];
+    errorMessage: string;
+  }>({
+    menu: [],
+    errorMessage: "",
+  }),
   reducers: {},
+  extraReducers: (builder) =>
+    builder
+      .addCase(getDishesForRestaurant.fulfilled, (state, { payload }) => {
+        entityAdapter.setMany(state, payload);
+        state.menu = payload.map(({ id }) => id);
+      })
+      .addCase(getDishesForRestaurant.rejected, (state, { payload }) => {
+        state.errorMessage = payload ?? "Error";
+      })
+      .addCase(getDishById.fulfilled, (state, { payload }) => {
+        entityAdapter.setOne(state, payload);
+      })
+      .addCase(getDishById.rejected, (state, { payload }) => {
+        state.errorMessage = payload ?? "Error";
+      }),
   selectors: {
-    selectDishById: (state, id: Identifier): IDishNormalized | undefined => {
-      return state.entities[id];
+    selectMenu: (state) => {
+      return state.menu;
     },
-    selectDishesIds: (state) => {
-      return state.ids;
+    selectErrorMessage: (state) => {
+      return state.errorMessage;
     },
   },
 });
 
-export const { selectDishById, selectDishesIds } = dishesSlice.selectors;
+const selectDishesSlice = (state: IRootState) => {
+  return state[dishesSlice.name];
+};
+
+export const { selectIds: selectDishesIds, selectById: selectDishById } =
+  entityAdapter.getSelectors(selectDishesSlice);
+
+export const { selectMenu, selectErrorMessage } = dishesSlice.selectors;

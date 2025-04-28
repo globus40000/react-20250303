@@ -2,7 +2,6 @@ import { FC, FormEvent } from "react";
 import { RATING_MAX, RATING_MIN, useReviewForm } from "./use-review-form";
 import { Counter } from "../Counter/counter";
 import { Button } from "../Button/button";
-import classNames from "classnames";
 import { FormField } from "../FormField/form-field";
 
 import styles from "./review-form.module.css";
@@ -31,11 +30,7 @@ export const ReviewForm: FC<IReviewFormProps> = ({ className }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      onReset={resetForm}
-      className={classNames(styles.root, className)}
-    >
+    <form onSubmit={handleSubmit} onReset={resetForm} className={className}>
       <FormField
         className={styles.field}
         label="Name"

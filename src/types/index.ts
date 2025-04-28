@@ -42,6 +42,8 @@ export interface IReviewNormalized {
 export interface IRestaurantNormalized {
   id: Identifier;
   name: string;
+  description: string;
+  img: string;
   menu: Identifier[];
   reviews: Identifier[];
 }
@@ -49,4 +51,11 @@ export interface IRestaurantNormalized {
 export interface IUserNormalized {
   id: Identifier;
   name: string;
+}
+
+export enum RequestStatus {
+  idle = "idle",
+  pending = "pending",
+  rejected = "rejected",
+  fulfilled = "fulfilled",
 }

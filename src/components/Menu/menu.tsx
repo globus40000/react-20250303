@@ -1,26 +1,31 @@
 import { FC } from "react";
-import { Identifier } from "../../types";
+import { Identifier, RequestStatus } from "../../types";
 import classNames from "classnames";
-import { DishLinkContainer } from "../DishLink/dish-link-container";
+import { MenuDishes } from "../MenuDishes/menu-dishes";
 
 import styles from "./menu.module.css";
 
 interface IMenuProps {
   dishesIds: Identifier[];
+  requestStatus: RequestStatus;
+  errorMessage: string;
   className?: string;
 }
 
-export const Menu: FC<IMenuProps> = ({ dishesIds, className }) => {
+export const Menu: FC<IMenuProps> = ({
+  dishesIds,
+  requestStatus,
+  errorMessage,
+  className,
+}) => {
   return (
     <div className={classNames(styles.root, className)}>
       <h3>Menu</h3>
-      <ul role="list">
-        {dishesIds.map((id) => (
-          <li key={id}>
-            <DishLinkContainer id={id} />
-          </li>
-        ))}
-      </ul>
+      <MenuDishes
+        dishesIds={dishesIds}
+        requestStatus={requestStatus}
+        errorMessage={errorMessage}
+      />
     </div>
   );
 };

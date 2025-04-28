@@ -1,20 +1,30 @@
 import { FC } from "react";
-import { IRestaurantNormalized } from "../../types";
+import { IRestaurantNormalized, RequestStatus } from "../../types";
 import { Tab } from "../Tab/tab";
 import { Outlet } from "react-router";
+import { RestaurantName } from "../RestaurantName/restaurant-name";
 
 import styles from "./restaurant.module.css";
 
 interface IRestaurantProps {
-  restaurant: IRestaurantNormalized;
+  restaurant: IRestaurantNormalized | undefined;
+  requestStatus: RequestStatus;
+  errorMessage: string;
 }
 
-export const Restaurant: FC<IRestaurantProps> = ({ restaurant }) => {
-  const { name } = restaurant;
-
+export const Restaurant: FC<IRestaurantProps> = ({
+  restaurant,
+  requestStatus,
+  errorMessage,
+}) => {
   return (
     <div className={styles.root}>
-      <h2>{name}</h2>
+      <RestaurantName
+        restaurant={restaurant}
+        requestStatus={requestStatus}
+        errorMessage={errorMessage}
+        className={styles.skeleton}
+      />
       <div className={styles.tabs}>
         <Tab title="Menu" to="menu" />
         <Tab title="Reviews" to="reviews" />
