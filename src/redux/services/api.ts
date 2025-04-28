@@ -34,7 +34,7 @@ export const api = createApi({
       query: ({ restaurantId, review }) => ({
         url: `/review/${restaurantId}`,
         body: review,
-        method: "post",
+        method: "POST",
       }),
       invalidatesTags: [{ type: "reviews", id: "all" }],
     }),
