@@ -4,6 +4,7 @@ import { Skeleton } from "../Skeleton/skeleton";
 import classNames from "classnames";
 
 import styles from "./dish-ingredients.module.css";
+import { IngredientsList } from "../IngredientsList/ingredients-list";
 
 interface IDishIngredientsProps {
   dish: IDishNormalized | undefined;
@@ -22,11 +23,7 @@ export const DishIngredients: FC<IDishIngredientsProps> = ({
       {isLoading ? (
         <Skeleton variant="rectangular" width={200} height={50} />
       ) : (
-        <ul role="list">
-          {(dish?.ingredients ?? []).map((ingredient) => (
-            <li key={ingredient}>{ingredient}</li>
-          ))}
-        </ul>
+        <IngredientsList ingredients={dish?.ingredients ?? []} />
       )}
     </div>
   );
