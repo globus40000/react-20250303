@@ -1,22 +1,39 @@
 import { FC } from "react";
-import { Identifier } from "../../types";
-import { useSelector } from "react-redux";
-import { IRootState } from "../../redux/store";
-import { selectReviewById } from "../../redux/entities/review/slice";
+import { IReviewNormalized } from "../../types";
 import { Review } from "./review";
+import {
+  IUpdateReviewBody,
+  useUpdateReviewMutation,
+} from "../../redux/services/api";
+import { getErrorMessage } from "../../redux/utils";
 
 interface IReviewContainerProps {
-  id: Identifier;
+  review: IReviewNormalized;
 }
 
-export const ReviewContainer: FC<IReviewContainerProps> = ({ id }) => {
-  const review = useSelector<IRootState, ReturnType<typeof selectReviewById>>(
-    (state) => selectReviewById(state, id)
+export const ReviewContainer: FC<IReviewContainerProps> = ({ review }) => {
+  const [
+    updateReview,
+    {
+      isLoading: isUpdateReviewLoading,
+      isError: isUpdateReviewError,
+      error: errorUpdateReview,
+    },
+  ] = useUpdateReviewMutation();
+
+  const errorMessageUpdateReview = getErrorMessage(errorUpdateReview);
+
+  const handleUpdateReview = (fields: IUpdateReviewBody) => {
+    void updateReview({ reviewId: review.id, fields });
+  };
+
+  return (
+    <Review
+      review={review}
+      onUpdateReview={handleUpdateReview}
+      isUpdateReviewLoading={isUpdateReviewLoading}
+      isUpdateReviewError={isUpdateReviewError}
+      errorMessageUpdateReview={errorMessageUpdateReview}
+    />
   );
-
-  if (!review) {
-    return null;
-  }
-
-  return <Review review={review} />;
 };

@@ -1,20 +1,22 @@
 import { FC } from "react";
-import { Identifier, RequestStatus } from "../../types";
+import { IDishNormalized } from "../../types";
 import classNames from "classnames";
 import { MenuDishes } from "../MenuDishes/menu-dishes";
 
 import styles from "./menu.module.css";
 
 interface IMenuProps {
-  dishesIds: Identifier[];
-  requestStatus: RequestStatus;
+  dishes: IDishNormalized[];
+  isLoading: boolean;
+  isError: boolean;
   errorMessage: string;
   className?: string;
 }
 
 export const Menu: FC<IMenuProps> = ({
-  dishesIds,
-  requestStatus,
+  dishes,
+  isLoading,
+  isError,
   errorMessage,
   className,
 }) => {
@@ -22,8 +24,9 @@ export const Menu: FC<IMenuProps> = ({
     <div className={classNames(styles.root, className)}>
       <h3>Menu</h3>
       <MenuDishes
-        dishesIds={dishesIds}
-        requestStatus={requestStatus}
+        dishes={dishes}
+        isLoading={isLoading}
+        isError={isError}
         errorMessage={errorMessage}
       />
     </div>

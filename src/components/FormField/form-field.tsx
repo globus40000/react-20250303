@@ -24,7 +24,11 @@ export const FormField: FC<PropsWithChildren<IFormFieldProps>> = ({
   children,
 }) => {
   return (
-    <div className={className}>
+    <div
+      className={classNames(className, {
+        [styles.textarea]: isTextArea,
+      })}
+    >
       <label
         htmlFor={name}
         className={classNames({

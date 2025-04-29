@@ -9,12 +9,12 @@ interface ICartItemProps {
 
 export const CartItem: FC<ICartItemProps> = ({ dish }) => {
   const { isAuthorized } = use(AuthContext);
-  const { id, name } = dish;
+  const { name } = dish;
 
   return (
     <div>
       {name}
-      {isAuthorized && <DishCounter id={id} />}
+      {isAuthorized && <DishCounter dish={dish} />}
     </div>
   );
 };

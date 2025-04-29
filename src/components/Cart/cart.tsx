@@ -1,24 +1,24 @@
 import { FC } from "react";
 import classNames from "classnames";
-import { CartItemContainer } from "../CartItem/cart-item-container";
-import { Identifier } from "../../types";
+import { CartItem } from "../CartItem/cart-item";
+import { IDishNormalized } from "../../types";
 
 import styles from "./cart.module.css";
 
 interface ICartProps {
-  dishesIds: Identifier[];
+  dishes: IDishNormalized[];
   className?: string;
 }
 
-export const Cart: FC<ICartProps> = ({ dishesIds, className }) => {
+export const Cart: FC<ICartProps> = ({ dishes, className }) => {
   return (
     <div className={classNames(styles.root, className)}>
       <h3>Cart</h3>
-      {dishesIds.length > 0 ? (
+      {dishes.length > 0 ? (
         <ul role="list">
-          {dishesIds.map((id) => (
-            <li key={id}>
-              <CartItemContainer id={id} />
+          {dishes.map((dish) => (
+            <li key={dish.id}>
+              <CartItem dish={dish} />
             </li>
           ))}
         </ul>

@@ -1,23 +1,34 @@
 import { FC, use } from "react";
-import { Identifier, RequestStatus } from "../../types";
+import { IReviewNormalized } from "../../types";
 import { ReviewForm } from "../ReviewForm/review-form";
 import { AuthContext } from "../AuthContextProvider/auth-context";
 import { ReviewsList } from "../ReviewsList/reviews-list";
+import { IAddReviewBody } from "../../redux/services/api";
 
 import styles from "./reviews.module.css";
 
 interface IReviewsProps {
-  reviewsIds: Identifier[];
+  reviews: IReviewNormalized[];
   textNoReviews?: string;
-  requestStatus: RequestStatus;
+  isLoading: boolean;
+  isError: boolean;
   errorMessage: string;
+  onAddReview: (review: IAddReviewBody) => void;
+  isAddReviewLoading: boolean;
+  isAddReviewError: boolean;
+  errorMessageAddReview: string;
 }
 
 export const Reviews: FC<IReviewsProps> = ({
-  reviewsIds,
+  reviews,
   textNoReviews,
-  requestStatus,
+  isLoading,
+  isError,
   errorMessage,
+  onAddReview,
+  isAddReviewLoading,
+  isAddReviewError,
+  errorMessageAddReview,
 }) => {
   const { isAuthorized } = use(AuthContext);
 
@@ -25,12 +36,21 @@ export const Reviews: FC<IReviewsProps> = ({
     <div className={styles.root}>
       <h3>Reviews</h3>
       <ReviewsList
-        reviewsIds={reviewsIds}
+        reviews={reviews}
         textNoReviews={textNoReviews}
-        requestStatus={requestStatus}
+        isLoading={isLoading}
+        isError={isError}
         errorMessage={errorMessage}
       />
-      {isAuthorized && <ReviewForm className={styles.form} />}
+      {isAuthorized && (
+        <ReviewForm
+          onSubmit={onAddReview}
+          isLoading={isAddReviewLoading}
+          isError={isAddReviewError}
+          errorMessage={errorMessageAddReview}
+          className={styles.form}
+        />
+      )}
     </div>
   );
 };

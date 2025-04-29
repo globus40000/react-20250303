@@ -1,33 +1,35 @@
 import { FC } from "react";
-import { Identifier, RequestStatus } from "../../types";
-import { DishLinkContainer } from "../DishLink/dish-link-container";
+import { IDishNormalized } from "../../types";
 import { Notification } from "../Notification/notification";
 import { Skeleton } from "../Skeleton/skeleton";
+import { DishLink } from "../DishLink/dish-link";
 
 interface IMenuDishesProps {
-  dishesIds: Identifier[];
-  requestStatus: RequestStatus;
+  dishes: IDishNormalized[];
+  isLoading: boolean;
+  isError: boolean;
   errorMessage: string;
 }
 
 export const MenuDishes: FC<IMenuDishesProps> = ({
-  dishesIds,
-  requestStatus,
+  dishes,
+  isLoading,
+  isError,
   errorMessage,
 }) => {
-  if (requestStatus === RequestStatus.pending) {
+  if (isLoading) {
     return <Skeleton variant="rectangular" width={200} height={50} />;
   }
 
-  if (requestStatus === RequestStatus.rejected) {
+  if (isError) {
     return <Notification message={errorMessage} />;
   }
 
   return (
     <ul role="list">
-      {dishesIds.map((id) => (
-        <li key={id}>
-          <DishLinkContainer id={id} />
+      {dishes.map((dish) => (
+        <li key={dish.id}>
+          <DishLink dish={dish} />
         </li>
       ))}
     </ul>

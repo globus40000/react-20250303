@@ -1,8 +1,13 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Identifier } from "../../../types";
+import { Identifier, IDishNormalized } from "../../../types";
 import { IRootState } from "../../store";
 
-type ICartState = Record<Identifier, number>;
+interface ICartItem {
+  dish: IDishNormalized;
+  amount: number;
+}
+
+type ICartState = Record<Identifier, ICartItem>;
 
 const initialState: ICartState = {};
 
@@ -14,37 +19,40 @@ export const cartSlice = createSlice({
   name: "cartSlice",
   initialState,
   reducers: {
-    addToCart: (state, { payload }: PayloadAction<Identifier>) => {
-      state[payload] = Math.min((state[payload] ?? AMOUNT_MIN) + 1, AMOUNT_MAX);
+    addToCart: (state, { payload: dish }: PayloadAction<IDishNormalized>) => {
+      state[dish.id] = {
+        dish,
+        amount: Math.min(
+          (state[dish.id]?.amount ?? AMOUNT_MIN) + 1,
+          AMOUNT_MAX
+        ),
+      };
     },
-    removeFromCart: (state, { payload }: PayloadAction<Identifier>) => {
-      if (!state[payload]) {
+    removeFromCart: (state, { payload: id }: PayloadAction<Identifier>) => {
+      if (!state[id]) {
         return;
       }
 
-      state[payload] = state[payload] - 1;
+      state[id].amount = state[id].amount - 1;
 
-      if (state[payload] <= AMOUNT_MIN) {
+      if (state[id].amount <= AMOUNT_MIN) {
         // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-        delete state[payload];
+        delete state[id];
       }
     },
   },
   selectors: {
     selectAmountByDishId: (state, id: Identifier): number | undefined => {
-      return state[id];
+      return state[id]?.amount;
     },
   },
 });
 
 const selectCartSlice = (state: IRootState) => state[cartSlice.name];
 
-export const selectCartDishesIds = createSelector(
-  [selectCartSlice],
-  (state) => {
-    return Object.keys(state);
-  }
-);
+export const selectCartDishes = createSelector([selectCartSlice], (state) => {
+  return Object.values(state).map(({ dish }) => dish);
+});
 
 export const { selectAmountByDishId } = cartSlice.selectors;
 

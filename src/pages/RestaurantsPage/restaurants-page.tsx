@@ -1,19 +1,21 @@
 import { FC } from "react";
-import { Identifier, RequestStatus } from "../../types";
+import { IRestaurantNormalized } from "../../types";
 import { Outlet } from "react-router";
 import { RestaurantsTabs } from "../../components/RestaurantsTabs/restaurants-tabs";
 
 import styles from "./restaurants-page.module.css";
 
 interface IRestaurantsPageProps {
-  restaurantsIds: Identifier[];
-  requestStatus: RequestStatus;
+  restaurants: IRestaurantNormalized[];
+  isLoading: boolean;
+  isError: boolean;
   errorMessage: string;
 }
 
 export const RestaurantsPage: FC<IRestaurantsPageProps> = ({
-  restaurantsIds,
-  requestStatus,
+  restaurants,
+  isLoading,
+  isError,
   errorMessage,
 }) => {
   return (
@@ -21,8 +23,9 @@ export const RestaurantsPage: FC<IRestaurantsPageProps> = ({
       <h1>Restaurants</h1>
       <div className={styles.tabs}>
         <RestaurantsTabs
-          restaurantsIds={restaurantsIds}
-          requestStatus={requestStatus}
+          restaurants={restaurants}
+          isLoading={isLoading}
+          isError={isError}
           errorMessage={errorMessage}
         />
       </div>

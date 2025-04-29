@@ -1,9 +1,9 @@
 import { createContext } from "react";
-import { IUser } from "../../types";
+import { IUserNormalized } from "../../types";
 
 interface IAuthContextValue {
   isAuthorized: boolean;
-  user: IUser | null;
+  user: IUserNormalized | null;
   login: () => void;
   logout: () => void;
 }

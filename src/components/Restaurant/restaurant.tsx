@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { IRestaurantNormalized, RequestStatus } from "../../types";
+import { IRestaurantNormalized } from "../../types";
 import { Tab } from "../Tab/tab";
 import { Outlet } from "react-router";
 import { RestaurantName } from "../RestaurantName/restaurant-name";
@@ -8,20 +8,23 @@ import styles from "./restaurant.module.css";
 
 interface IRestaurantProps {
   restaurant: IRestaurantNormalized | undefined;
-  requestStatus: RequestStatus;
+  isLoading: boolean;
+  isError: boolean;
   errorMessage: string;
 }
 
 export const Restaurant: FC<IRestaurantProps> = ({
   restaurant,
-  requestStatus,
+  isLoading,
+  isError,
   errorMessage,
 }) => {
   return (
     <div className={styles.root}>
       <RestaurantName
         restaurant={restaurant}
-        requestStatus={requestStatus}
+        isLoading={isLoading}
+        isError={isError}
         errorMessage={errorMessage}
         className={styles.skeleton}
       />

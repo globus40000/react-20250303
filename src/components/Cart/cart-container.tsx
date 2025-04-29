@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
-import { selectCartDishesIds } from "../../redux/entities/cart/slice";
+import { selectCartDishes } from "../../redux/entities/cart/slice";
 import { Cart } from "./cart";
 
 interface ICartContainerProps {
@@ -8,7 +8,7 @@ interface ICartContainerProps {
 }
 
 export const CartContainer: FC<ICartContainerProps> = ({ className }) => {
-  const dishesIds = useSelector(selectCartDishesIds);
+  const dishes = useSelector(selectCartDishes);
 
-  return <Cart dishesIds={dishesIds} className={className} />;
+  return <Cart dishes={dishes} className={className} />;
 };
